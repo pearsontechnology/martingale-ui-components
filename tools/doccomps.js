@@ -1,4 +1,4 @@
-const l = require('./src');
+const l = require('../src');
 import PropTypes from 'prop-types';
 
 const cnames = Object.keys(l);

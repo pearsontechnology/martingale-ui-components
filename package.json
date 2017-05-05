@@ -8,6 +8,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "test": "jest",
+    "docs": "NODE_ENV=development babel-node tools/doccomps.js",
     "compile": "NODE_ENV=production babel src --out-dir lib",
     "pretest": "npm run compile",
     "prepublish": "npm run test"
