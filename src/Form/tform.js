@@ -13,7 +13,7 @@ const BareSchema = TForm.struct({});
 
 class BaseForm extends React.Component{
   static propTypes = {
-    schema: PropTypes.object,
+    schema: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     value: PropTypes.any,
     onSubmit: PropTypes.func,
     submitTo: PropTypes.shape({
