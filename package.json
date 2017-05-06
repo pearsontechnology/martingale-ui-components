@@ -1,6 +1,6 @@
 {
   "name": "martingale-ui-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Collection of all of the base UI components used within Martingale",
   "main": "index.js",
   "repository": "https://github.com/pearsontechnology/martingale-ui-components.git",
@@ -21,10 +21,10 @@
     "react-test-renderer": "^15.5.4"
   },
   "dependencies": {
-    "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.5.4",
     "martingale-utils": "file:../utils/",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
     "react-icons": "^2.2.3",
     "react-router-dom": "^4.1.1",
     "tcomb-form": "^0.9.16"
