@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Col,
-  Row
-} from '../Grid';
+import Col from '../Grid/Col';
+import Row from '../Grid/Row';
 
 import PanelFooter from './Footer';
 
@@ -20,14 +18,11 @@ const CountPanel = (props)=>{
     link = '#',
     title,
     more = 'View Details',
-    icon
+    Icon
   } = props;
   const className = classnames('panel', `panel-${color}`, ...addlClasses.split(/[ \t]+/));
-  const smallIcon = iconWrapper({icon});
-  const largeIcon = iconWrapper({
-      icon,
-      size: 64
-    });
+  const smallIcon = <Icon />;
+  const largeIcon = <Icon size={64} />;
 
   return (
     <Col lg={3} md={6}>
