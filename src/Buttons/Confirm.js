@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from './Button';
-import {ConfirmDialog} from '../Dialogs';
+import ConfirmDialog from '../Dialogs/Confirm';
 
 class ConfirmButton extends React.Component{
   constructor({dialogOpen=false}){
