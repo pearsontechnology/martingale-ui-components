@@ -65,7 +65,7 @@ Panel.propTypes = {
   md: PropTypes.number,
   sm: PropTypes.number,
   xs: PropTypes.number,
-  inset: PropTypes.boolean
+  inset: PropTypes.bool
 };
 
 export default Panel;
