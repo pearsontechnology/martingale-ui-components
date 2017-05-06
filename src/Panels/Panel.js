@@ -45,17 +45,8 @@ Panel.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-    PropTypes.func
-  ]),
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.func
-  ]),
-  children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element,
-    PropTypes.func
+    PropTypes.func,
+    PropTypes.array
   ]),
   type: PropTypes.string,
   size: PropTypes.number,
