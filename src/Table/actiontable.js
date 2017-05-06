@@ -15,7 +15,6 @@ const ActionTable = ({mapper, actions, ...props})=>{
     return <Link key={index} to={replaceTokens(link, data)} className={`btn btn-${btnStyle}`} {...props}>{caption}</Link>
   };
   const createAction = (action, row, index)=>{
-    console.log(action);
     if(React.isValidElement(action)){
       return <span key={index}>{action}</span>;
     }
