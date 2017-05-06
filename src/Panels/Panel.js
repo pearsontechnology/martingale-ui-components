@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Col
-} from '../Grid';
+import Col from '../Grid/Col';
 import PanelHeader from './Header';
 import PanelFooter from './Footer';
 import PanelTitle from './Title';
