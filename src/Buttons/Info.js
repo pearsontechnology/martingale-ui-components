@@ -16,19 +16,19 @@ const DEFAULT_ACTIONS={
 class InfoButton extends React.Component{
   handleOk(dialog){
     if(this.props.onOk){
-      return this.props.onOk(this);
+      return this.props.onOk(dialog);
     }
-    this.dialog.close();
+    this.close();
   }
 
   handleCancel(dialog){
     if(this.props.onCancel){
-      return this.props.onCancel(this);
+      return this.props.onCancel(dialog);
     }
     if(this.props.onOk){
-      return this.props.onOk(this);
+      return this.props.onOk(dialog);
     }
-    this.dialog.close();
+    this.close();
   }
 
   open(){
@@ -40,7 +40,7 @@ class InfoButton extends React.Component{
   }
 
   showDialog(e){
-    e.preventDefault();
+    e && e.preventDefault();
     this.open();
   }
 
@@ -48,25 +48,25 @@ class InfoButton extends React.Component{
     const {
       children,
       caption,
-      dialogTitle,
-      dialogMessage,
-      onOk,
-      dialogOpen,
-      actions,
+      title,
+      message,
+      visible,
+      actions = DEFAULT_ACTIONS,
+      onOk, // to remove it from props
       ...props
     } = this.props;
-    const contents = caption || children;
+    const contents = message || children;
     return (
       <span>
         <Dialog
           ref={(dialog)=>this.dialog=dialog}
-          actions={DEFAULT_ACTIONS}
-          visible={dialogOpen}
-          title={dialogTitle}
-          message={dialogMessage}
+          actions={actions}
+          visible={visible}
+          title={title}
+          message={contents}
           onOk={this.handleOk.bind(this)}
           onCancel={this.handleCancel.bind(this)} />
-        <Button onClick={this.showDialog.bind(this)} {...props}>{contents}</Button>
+        <Button onClick={this.showDialog.bind(this)} {...props}>{caption}</Button>
       </span>
     );
   }
@@ -75,9 +75,9 @@ class InfoButton extends React.Component{
 InfoButton.propTypes = Object.assign({}, Button.propTypes, {
   onOk: PropTypes.func,
   onCancel: PropTypes.func,
-  dialogOpen: PropTypes.bool,
-  dialogTitle: PropTypes.string,
-  dialogMessage: PropTypes.string,
+  visible: PropTypes.bool,
+  title: PropTypes.string,
+  message: PropTypes.string,
   caption: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
