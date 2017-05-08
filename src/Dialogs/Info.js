@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import BaseDialog from './Dialog';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,7 @@ const DEFAULT_ACTIONS={
     if(dialog.props.onOk){
       return dialog.props.onOk(dialog);
     }
-    dialog.hide();
+    dialog.close && dialog.close();
   }
 };
 
