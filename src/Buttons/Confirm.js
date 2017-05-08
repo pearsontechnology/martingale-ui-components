@@ -2,69 +2,88 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from './Button';
-import ConfirmDialog from '../Dialogs/Confirm';
+import Dialog from '../Dialogs/Dialog';
+
+const DEFAULT_ACTIONS={
+  'Yes': {
+    btnStyle: 'success',
+    handler(dialog){
+      if(dialog.props.onYes) {
+        return dialog.props.onYes(dialog);
+      }
+      dialog.close();
+    }
+  },
+  'No': {
+    btnStyle: 'danger',
+    handler(dialog){
+      if(dialog.props.onNo) {
+        return dialog.props.onNo(dialog);
+      }
+      dialog.close();
+    }
+  }
+};
 
 class ConfirmButton extends React.Component{
-  constructor({dialogOpen=false}){
-    super();
-    this.state={isDialogOpen: dialogOpen};
-  }
-
   handleYes(dialog){
     if(this.props.onYes){
-      return this.props.onYes(this);
+      return this.props.onYes(this.dialog);
     }
-    this.setState({isDialogOpen: false});
+    this.close();
   }
 
   handleNo(dialog){
     if(this.props.onNo){
-      return this.props.onNo(this);
+      return this.props.onNo(this.dialog);
     }
-    this.setState({isDialogOpen: false});
+    this.close();
   }
 
   handleCancel(dialog){
     if(this.props.onCancel){
-      return this.props.onCancel(this);
+      return this.props.onCancel(this.dialog);
     }
     if(this.props.onNo){
-      return this.props.onNo(this);
+      return this.props.onNo(this.dialog);
     }
-    this.setState({isDialogOpen: false});
+    this.close();
   }
 
-  show(){
-    this.setState({isDialogOpen: true});
+  open(){
+    this.dialog.open();
   }
 
-  hide(){
-    this.setState({isDialogOpen: false});
+  close(){
+    this.dialog.close();
   }
 
   showDialog(e){
-    e.preventDefault();
-    this.setState({isDialogOpen: true});
+    e && e.preventDefault();
+    this.open();
   }
 
   render(){
     const {
       children,
       caption,
-      dialogTitle,
-      dialogMessage,
-      onYes,
-      onNo,
+      title,
+      message,
+      visible,
+      actions = DEFAULT_ACTIONS,
+      onYes, // to remove it from props
+      onNo, // to remove it from props
       ...props
     } = this.props;
     const contents = caption || children;
-    const {isDialogOpen} = this.state;
     return (
       <span>
-        <ConfirmDialog
-          visible={isDialogOpen}
-          title={dialogTitle}
-          message={dialogMessage}
+        <Dialog
+          ref={(dialog)=>this.dialog=dialog}
+          actions={actions}
+          visible={visible}
+          title={title}
+          message={message}
           onYes={this.handleYes.bind(this)}
           onNo={this.handleNo.bind(this)}
           onCancel={this.handleCancel.bind(this)} />
@@ -78,9 +97,9 @@ ConfirmButton.propTypes = Object.assign({}, Button.propTypes, {
   onYes: PropTypes.func,
   onNo: PropTypes.func,
   onCancel: PropTypes.func,
-  dialogOpen: PropTypes.bool,
-  dialogTitle: PropTypes.string,
-  dialogMessage: PropTypes.string,
+  visible: PropTypes.bool,
+  title: PropTypes.string,
+  message: PropTypes.string,
   caption: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
