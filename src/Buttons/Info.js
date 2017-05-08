@@ -2,19 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Button from './Button';
-import InfoDialog from '../Dialogs/Info';
+import Dialog from '../Dialogs/Dialog';
+
+const DEFAULT_ACTIONS={
+  'Ok'(dialog){
+    if(dialog.props.onOk){
+      return dialog.props.onOk(dialog);
+    }
+    dialog.close && dialog.close();
+  }
+};
 
 class InfoButton extends React.Component{
-  constructor({dialogOpen=false}){
-    super();
-    this.state={isDialogOpen: dialogOpen};
-  }
-
   handleOk(dialog){
     if(this.props.onOk){
       return this.props.onOk(this);
     }
-    this.setState({isDialogOpen: false});
+    this.dialog.close();
   }
 
   handleCancel(dialog){
@@ -24,20 +28,20 @@ class InfoButton extends React.Component{
     if(this.props.onOk){
       return this.props.onOk(this);
     }
-    this.setState({isDialogOpen: false});
+    this.dialog.close();
   }
 
-  show(){
-    this.setState({isDialogOpen: true});
+  open(){
+    this.dialog.open();
   }
 
-  hide(){
-    this.setState({isDialogOpen: false});
+  close(){
+    this.dialog.close();
   }
 
   showDialog(e){
     e.preventDefault();
-    this.setState({isDialogOpen: true});
+    this.open();
   }
 
   render(){
@@ -47,14 +51,17 @@ class InfoButton extends React.Component{
       dialogTitle,
       dialogMessage,
       onOk,
+      dialogOpen,
+      actions,
       ...props
     } = this.props;
     const contents = caption || children;
-    const {isDialogOpen} = this.state;
     return (
       <span>
-        <InfoDialog
-          visible={isDialogOpen}
+        <Dialog
+          ref={(dialog)=>this.dialog=dialog}
+          actions={DEFAULT_ACTIONS}
+          visible={dialogOpen}
           title={dialogTitle}
           message={dialogMessage}
           onOk={this.handleOk.bind(this)}

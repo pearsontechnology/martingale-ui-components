@@ -5,5 +5,4 @@ import InfoDialog from "./Info";
 export default {
   BaseDialog,
   ConfirmDialog,
-  InfoDialog
 };

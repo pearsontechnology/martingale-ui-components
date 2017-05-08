@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {Modal} from 'react-bootstrap';
 
-const creaetActionHandler = (actionName, action, dialog)=>{
+const createActionHandler = (actionName, action, dialog)=>{
   if(!action){
     throw new Error(`Malformed action ${actionName}`);
   }
@@ -29,7 +29,7 @@ const getDialogFooter = (footer, actions, dialog)=>{
     const actionButtons = Object.keys(actions).map((actionName)=>{
       const action = actions[actionName];
       return (
-        <button key={actionName} onClick={creaetActionHandler(actionName, action, dialog)} className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</button>
+        <button key={actionName} onClick={createActionHandler(actionName, action, dialog)} className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</button>
       );
     });
     return (
@@ -95,7 +95,6 @@ Dialog.propTypes = {
   onHide: PropTypes.func,
   title: PropTypes.string,
   message: PropTypes.string,
-  actionsBoundTo: PropTypes.object,
   actions: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.string,
