@@ -1,14 +1,8 @@
-import {
-  Form,
-  TForm
-} from './tform';
+import KongForm from './kongform'
 
-import {
-  KongForm
-} from './kongform'
+import Form from './form';
 
 export default {
   Form,
-  TForm,
   KongForm
 };

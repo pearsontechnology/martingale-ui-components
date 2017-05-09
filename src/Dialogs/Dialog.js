@@ -1,7 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import {Modal} from 'react-bootstrap';
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalClose,
+  ModalBody,
+  ModalFooter
+} from 'react-modal-bootstrap';
+
+import Button from '../Buttons/Button';
 
 const createActionHandler = (actionName, action, dialog)=>{
   if(!action){
@@ -29,13 +38,13 @@ const getDialogFooter = (footer, actions, dialog)=>{
     const actionButtons = Object.keys(actions).map((actionName)=>{
       const action = actions[actionName];
       return (
-        <button key={actionName} onClick={createActionHandler(actionName, action, dialog)} className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</button>
+        <Button key={actionName} onClick={createActionHandler(actionName, action, dialog)} className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</Button>
       );
     });
     return (
-      <Modal.Footer>
+      <ModalFooter>
         {actionButtons}
-      </Modal.Footer>
+      </ModalFooter>
     );
   }
   return '';
@@ -77,13 +86,13 @@ class Dialog extends Component{
       footer
     } = this;
     return (
-      <Modal show={visible} onHide={this.close.bind(this)}>
-        <Modal.Header>
-          <Modal.Title>{title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+      <Modal isOpen={visible} onRequestHide={this.close.bind(this)}>
+        <ModalHeader>
+          <ModalTitle>{title}</ModalTitle>
+        </ModalHeader>
+        <ModalBody>
           {contents}
-        </Modal.Body>
+        </ModalBody>
         {footer}
       </Modal>
     );

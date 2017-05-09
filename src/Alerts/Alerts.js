@@ -86,9 +86,9 @@ const DismissAfter = (Wrap)=>{
 const AlertWrapper = (props)=>{
   const {
     dismissable = false,
-    dismissAfter = false
+    dismissAfter
   } = props;
-  if(dismissAfter){
+  if(typeof(dismissAfter)!=='undefined'){
     return React.createElement(DismissAfter(DismissableAlert), props);
   }
   const AlertType = dismissable?DismissableAlert:BasicAlert;
@@ -98,7 +98,7 @@ const AlertWrapper = (props)=>{
 AlertWrapper.propTypes = Object.assign({}, Alert.propTypes, {
   bsStyle: PropTypes.string,
   dismissable: PropTypes.bool,
-  dismissAfter: PropTypes.bool,
+  dismissAfter: PropTypes.number,
   type: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
