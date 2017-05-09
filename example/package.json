@@ -5,7 +5,7 @@
   "dependencies": {
     "less": "^2.7.2",
     "less-plugin-clean-css": "^1.5.1",
-    "martingale-page-schema": "file:../../page-schema/",
+    "martingale-page-schema": "martingale-page-schema",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "react": "^15.5.4",

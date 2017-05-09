@@ -12,7 +12,6 @@ class Form extends Component{
       ...props
     } = this.props;
     const schema = schemaEncoder?schemaEncoder(formSchema):formSchema;
-    console.log(schema);
     return (
       <JsonSchemaForm
         schema={schema}

@@ -1,20 +1,6 @@
 import React, {Component} from 'react';
 import Form from './form';
 
-/*
-{
-  type: 'object',
-  required: [],
-  properties: {
-    name: {
-      type: 'string',
-      title: 'Title',
-      description: 'Something goes here'
-    }
-  }
-}
-*/
-
 const camelToProperCase = (src)=>{
   return src.charAt(0).toUpperCase()+src.substr(1).replace(/([a-z0-9])([A-Z])/g, (m, p, s)=>`${p} ${s}`);
 };
