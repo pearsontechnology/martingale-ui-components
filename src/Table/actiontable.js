@@ -12,6 +12,9 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
     });
   };
   const createLinkAction = ({caption, link, btnStyle='default', ...props}, index, data)=>{
+    if(typeof(link) === 'function'){
+      return <Link key={index} to={link(data)} className={`btn btn-${btnStyle}`} {...props}>{caption}</Link>
+    }
     return <Link key={index} to={replaceTokens(link, data)} className={`btn btn-${btnStyle}`} {...props}>{caption}</Link>
   };
   const createAction = (action, row, index)=>{
