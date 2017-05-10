@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table} from './table';
-import {Link} from '../Router';
+import Link from '../Router/routerlink';
 import {getObjectValue} from 'martingale-utils';
 import PropTypes from 'prop-types';
 
@@ -29,9 +29,10 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
   const actionMapper = (data)=>{
     const row = mapper?mapper(data):data;
     if(Array.isArray(actions)){
-      return Object.assign({}, row, {actions: <span>{actions.map((action, index)=>createAction(action, row, index))}</span>});
+      const actionElements = <span>{actions.map((action, index)=>createAction(action, data, index))}</span>;
+      return Object.assign({}, row, {actions: actionElements});
     }
-    return Object.assign({}, row, {actions: createAction(actions, row)});
+    return Object.assign({}, row, {actions: createAction(actions, data)});
   };
   return <Table mapper={actionMapper} {...props} />;
 };
