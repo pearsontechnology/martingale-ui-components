@@ -53,7 +53,11 @@ const KongEncoder = (schema, key)=>{
     case('timestamp'):
       return mkType(key, 'date', schema);
     case('string'):
-      return mkType(key, 'string', schema);
+      const stringDef = mkType(key, 'string', schema);
+      if(schema.enum){
+        stringDef.enum = schema.enum;
+      }
+      return stringDef;
     case('number'):
       return mkType(key, 'number', schema);
     case('boolean'):
