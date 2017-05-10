@@ -5,7 +5,7 @@ import {getObjectValue} from 'martingale-utils';
 import PropTypes from 'prop-types';
 
 const reToken = /\${([^}]+)}/g;
-const ActionTable = ({mapper, actions, ...props})=>{
+const ActionTable = ({mapper, actions=[], ...props})=>{
   const replaceTokens = (source, data)=>{
     return source.replace(reToken, (full, token)=>{
       return getObjectValue(token, data);
