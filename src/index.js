@@ -9,6 +9,7 @@ import Panels from './Panels';
 import Router from './Router';
 import Table from './Table';
 import Text from './Text';
+import JsonView from './JsonView';
 
 module.exports = {
   ...Alerts,
@@ -21,5 +22,6 @@ module.exports = {
   ...Panels,
   ...Router,
   ...Table,
-  ...Text
+  ...Text,
+  ...JsonView
 };
