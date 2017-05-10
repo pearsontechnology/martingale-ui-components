@@ -13,7 +13,7 @@ class Form extends Component{
       data,
       ...props
     } = this.props;
-    const schema = schemaEncoder?schemaEncoder(formSchema):formSchema;
+    const schema = formSchema?(schemaEncoder?schemaEncoder(formSchema):formSchema):{};
     return (
       <JsonSchemaForm
         schema={schema}
@@ -27,6 +27,7 @@ class Form extends Component{
 };
 
 Form.propTypes = Object.assign({}, JsonSchemaForm.propTypes, {
+  schema: PropTypes.object,
   data: PropTypes.oneOfType(PropTypes.object, PropTypes.array),
   schemaEncoder: PropTypes.func
 });
