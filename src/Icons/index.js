@@ -19,6 +19,8 @@ import IconBilling from 'react-icons/lib/fa/money';
 import IconDatabase from 'react-icons/lib/fa/database';
 import IconGateway from 'react-icons/lib/fa/sitemap';
 import IconTimer from 'react-icons/lib/fa/clock-o';
+import IconQuestion from 'react-icons/lib/fa/question';
+import IconUnknown from 'react-icons/lib/fa/question-circle';
 
 import Icon from 'react-icon-base';
 const IconLogo = (props)=>(
@@ -52,5 +54,7 @@ export default {
   IconBilling,
   IconDatabase,
   IconGateway,
-  IconTimer
+  IconTimer,
+  IconQuestion,
+  IconUnknown
 };
