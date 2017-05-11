@@ -151,7 +151,7 @@ class BaseForm extends Component{
           }
           this.navigateToSuccess(data);
         }
-      })
+      });
     }
     this.navigateToSuccess(data);
   }
