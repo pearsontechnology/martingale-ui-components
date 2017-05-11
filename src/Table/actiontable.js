@@ -43,7 +43,7 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
         title={replaceTokens(title, data)}
         message={replaceTokens(message, data)}
         successUrl={replaceTokens(successUrl, data)}
-        caption={replaceTokens(caption)}
+        caption={replaceTokens(caption, data)}
         {...props}
         />
     );
