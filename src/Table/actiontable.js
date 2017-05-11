@@ -3,19 +3,55 @@ import {Table} from './table';
 import Link from '../Router/routerlink';
 import {getObjectValue} from 'martingale-utils';
 import PropTypes from 'prop-types';
+import DeleteButton from '../Buttons/Delete';
 
 const reToken = /\${([^}]+)}/g;
 const ActionTable = ({mapper, actions=[], ...props})=>{
   const replaceTokens = (source, data)=>{
+    if(typeof(source)==='undefined'){
+      return source;
+    }
+    if(typeof(source)==='function'){
+      return source(data);
+    }
     return source.replace(reToken, (full, token)=>{
       return getObjectValue(token, data);
     });
   };
   const createLinkAction = ({caption, link, btnStyle='default', ...props}, index, data)=>{
-    if(typeof(link) === 'function'){
-      return <Link key={index} to={link(data)} className={`btn btn-${btnStyle}`} {...props}>{caption}</Link>
-    }
-    return <Link key={index} to={replaceTokens(link, data)} className={`btn btn-${btnStyle}`} {...props}>{caption}</Link>
+    return (
+      <Link
+        key={index}
+        to={replaceTokens(link, data)}
+        className={`btn btn-${btnStyle}`} {...props}
+        >
+        {replaceTokens(caption)}
+      </Link>
+    );
+  };
+  const createDeleteAction = ({
+    caption='Delete',
+    delete: deleteTarget,
+    title,
+    message,
+    successUrl,
+    ...props}, index, data)=>{
+    return (
+      <DeleteButton
+        key={index}
+        target={replaceTokens(deleteTarget, data)}
+        title={replaceTokens(title, data)}
+        message={replaceTokens(message, data)}
+        successUrl={replaceTokens(successUrl, data)}
+        {...props}
+        >
+        {replaceTokens(caption)}
+      </DeleteButton>
+    );
+  };
+  const createComponentAction = ({Component, props}, index, data)=>{
+    console.log(Component, props)
+    return <Component {...props} />;
   };
   const createAction = (action, row, index)=>{
     if(React.isValidElement(action)){
@@ -24,8 +60,14 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
     if(action.link){
       return createLinkAction(action, index, row);
     }
+    if(action.delete){
+      return createDeleteAction(action, index, row);
+    }
     if(typeof(action)==='function'){
       return action(row, action, index);
+    }
+    if(typeof(action.Component)==='function'){
+      return createComponentAction(action, index, row);
     }
     return action;
   };

@@ -28,6 +28,15 @@ const KongEncoder = (schema, key)=>{
         }
         return def;
       }, {});
+    if(schema.type==='array'){
+      const arrSchema = mkType(key, 'array', schema);
+      arrSchema.items = {
+        type: 'object',
+        required,
+        properties
+      };
+      return arrSchema;
+    }
     return {
       type: 'object',
       required,
@@ -63,7 +72,7 @@ const KongEncoder = (schema, key)=>{
     case('boolean'):
       return mkType(key, 'boolean', schema);
     case('array'):
-      const arrayChildSchema = schema.schema?KongEncoder(schema.schema, key):mkType(key, 'string', schema);
+      const arrayChildSchema = schema.fields?KongEncoder(schema, key):mkType(key, 'string', schema);
       const arrSchema = mkType(key, 'array', schema);
       arrSchema.items = schema.enum?{type: 'string', enum: schema.enum}:arrayChildSchema;
       if(schema.enum){
