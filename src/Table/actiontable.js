@@ -43,10 +43,9 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
         title={replaceTokens(title, data)}
         message={replaceTokens(message, data)}
         successUrl={replaceTokens(successUrl, data)}
+        caption={replaceTokens(caption)}
         {...props}
-        >
-        {replaceTokens(caption)}
-      </DeleteButton>
+        />
     );
   };
   const createComponentAction = ({Component, props}, index, data)=>{
