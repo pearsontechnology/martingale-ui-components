@@ -20,6 +20,8 @@ import IconDatabase from 'react-icons/lib/fa/database';
 import IconGateway from 'react-icons/lib/fa/sitemap';
 import IconTimer from 'react-icons/lib/fa/clock-o';
 import IconQuestion from 'react-icons/lib/fa/question';
+import IconCertificate from 'react-icons/lib/fa/certificate';
+import IconSNI from 'react-icons/lib/md/security';
 import IconUnknown from 'react-icons/lib/fa/question-circle';
 
 import Icon from 'react-icon-base';
@@ -56,5 +58,7 @@ export default {
   IconGateway,
   IconTimer,
   IconQuestion,
+  IconCertificate,
+  IconSNI,
   IconUnknown
 };
