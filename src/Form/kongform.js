@@ -1,16 +1,37 @@
 import React, {Component} from 'react';
 import Form from './form';
+import {
+  betterType
+} from 'martingale-utils';
 
-const camelToProperCase = (src)=>{
-  return src.charAt(0).toUpperCase()+src.substr(1).replace(/([a-z0-9])([A-Z])/g, (m, p, s)=>`${p} ${s}`);
+const keyToTitle = (src)=>{
+  return src.charAt(0).toUpperCase()+
+      src.substr(1)
+        .replace(/([a-z0-9])([A-Z])/g, (m, p, s)=>`${p} ${s}`)
+        .replace(/([a-z0-9])_([A-Z0-9])/gi, (m, p, s)=>`${p} ${s.toUpperCase()}`);
+};
+
+const getDefaultValue = (type, value)=>{
+  const defaultType = betterType(value);
+  if(type === 'array' && defaultType !== 'array'){
+    return [];
+  }
+  if(type === 'table' && defaultType !== 'object'){
+    return {};
+  }
+  if(type === 'string' && defaultType !== 'string'){
+    return '';
+  }
+  return value;
 };
 
 const mkType = (key, type, schema)=>{
+  const defaultValue = getDefaultValue(type, schema.default);
   return {
     type,
-    title: camelToProperCase(key),
+    title: keyToTitle(key),
     description: schema.description,
-    default: schema.default
+    default: defaultValue
   };
 };
 
