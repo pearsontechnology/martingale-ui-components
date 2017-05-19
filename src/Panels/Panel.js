@@ -18,7 +18,9 @@ const Panel = (props)=>{
     md,
     sm,
     xs,
-    inset=false
+    inset=false,
+    maxHeight,
+    style={}
   } = props;
   const header = title||headerElems?<PanelHeader>{title?<PanelTitle>{title}</PanelTitle>:headerElems}</PanelHeader>:'';
   const footer = footerElems?<PanelFooter>{footerElems}</PanelFooter>:'';
@@ -29,11 +31,17 @@ const Panel = (props)=>{
     sm,
     xs,
   };
+  if(maxHeight){
+    style.maxHeight=maxHeight;
+    style.overflow=style.overflow||'auto';
+  }
   return (
     <Col {...colProps}>
       <div className={`panel panel-${type}`}>
         {header}
-        {inset?<PanelInset>{children}</PanelInset>:children}
+        <div style={style}>
+          {inset?<PanelInset>{children}</PanelInset>:children}
+        </div>
         {footer}
       </div>
     </Col>
@@ -54,7 +62,9 @@ Panel.propTypes = {
   md: PropTypes.number,
   sm: PropTypes.number,
   xs: PropTypes.number,
-  inset: PropTypes.bool
+  inset: PropTypes.bool,
+  maxHeight: PropTypes.number,
+  style: PropTypes.obj
 };
 
 export default Panel;
