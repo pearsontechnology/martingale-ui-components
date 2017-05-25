@@ -29,7 +29,11 @@ const upperIt=(s)=>{
       return map.value;
     }
     return res;
-  }, upperFirst(s));
+  }, upperFirst(s)).replace(/([a-z])([A-Z])/g, (match, first, second)=>{
+    return `${first} ${second}`
+  }).replace(/([a-z])_([a-z])/gi, (match, first, second)=>{
+    return `${first} ${second}`
+  });
 };
 
 const makeCaption=(src)=>src.replace(/_/g, ' ').replace(/[ \t]+/, ' ').trim().split(' ').map(upperIt).join(' ');
