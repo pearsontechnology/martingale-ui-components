@@ -64,7 +64,7 @@ Panel.propTypes = {
   xs: PropTypes.number,
   inset: PropTypes.bool,
   maxHeight: PropTypes.number,
-  style: PropTypes.obj
+  style: PropTypes.object
 };
 
 export default Panel;
