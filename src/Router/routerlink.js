@@ -5,7 +5,12 @@ import {
   Link
 } from 'react-router-dom';
 
-const RouterLink = ({caption, children, ...props})=><Link {...props}>{caption||children}</Link>;
+const RouterLink = ({caption, children, to, ...props})=>{
+  if(typeof(to)==='string'){
+    return <Link to={to} {...props}>{caption||children}</Link>;
+  }
+  return <Link to={to(props)} {...props}>{caption||children}</Link>;
+};
 
 RouterLink.propTypes = {
   caption: PropTypes.string,
@@ -14,7 +19,7 @@ RouterLink.propTypes = {
     PropTypes.element,
     PropTypes.func
   ]),
-  to: PropTypes.string,
+  to: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   className: PropTypes.string
 };
 
