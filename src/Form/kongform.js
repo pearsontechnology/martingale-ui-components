@@ -107,8 +107,46 @@ const KongEncoder = (schema, key)=>{
   }
 };
 
-const KongForm = ({schemaEncoder=KongEncoder, ...props})=>(
-  <Form schemaEncoder={schemaEncoder} {...props} />
+const KongUiEncoder = (schema)=>{
+  if(typeof(schema.fields)==='object' && (schema.type !== 'array')){
+    const properties = Object.keys(schema.fields).reduce((def, fieldKey)=>{
+      const fieldSchema = schema.fields[fieldKey];
+      const fieldDef = KongUiEncoder(fieldSchema);
+      if(fieldDef){
+        return Object.assign({}, def, {[fieldKey]: fieldDef});
+      }
+      return def;
+    }, {});
+    return properties;
+  }
+  switch(schema.type){
+    case('table'):
+      return KongUiEncoder(schema.schema)
+    case('string'):
+      if(schema.multiline){
+        return {
+          "ui:widget": "textarea"
+        };
+      }
+    case('array'):
+      if(schema.fields){
+        return {
+          items: KongUiEncoder({fields: schema.fields})
+        };
+      }
+      if(schema.multiline){
+        return {
+          items: {
+            "ui:widget": "textarea"
+          }
+        };
+      }
+  }
+  return {};
+};
+
+const KongForm = ({schemaEncoder=KongEncoder, uiSchemaEncoder=KongUiEncoder, ...props})=>(
+  <Form schemaEncoder={schemaEncoder} uiSchemaEncoder={uiSchemaEncoder} {...props} />
 );
 
 KongForm.propTypes = Form.propTypes;

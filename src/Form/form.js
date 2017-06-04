@@ -199,12 +199,14 @@ class BaseForm extends Component{
     const {
       children,
       schemaEncoder,
+      uiSchemaEncoder,
       schema: formSchema,
       stripInvalid=true,
       ...props
     } = this.props;
     const data = this.getPropData();
     const schema = formSchema?(schemaEncoder?schemaEncoder(formSchema):formSchema):{};
+    const uiSchema = formSchema?(uiSchemaEncoder?uiSchemaEncoder(formSchema):{}):{};
     const {
       value,
       errors: validationErrors
@@ -217,6 +219,7 @@ class BaseForm extends Component{
       <div>
         {errors}
         <JsonSchemaForm
+          uiSchema={uiSchema}
           schema={schema}
           formData={jsFormData}
           onSubmit={this.onSubmit.bind(this)}
@@ -236,6 +239,7 @@ Form.propTypes = Object.assign({}, JsonSchemaForm.propTypes, {
   dataRoot: PropTypes.string,
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   schemaEncoder: PropTypes.func,
+  uiSchemaEncoder: PropTypes.func,
   successUrl: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   submitTo: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   stripInvalid: PropTypes.bool,
