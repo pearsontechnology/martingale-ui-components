@@ -108,8 +108,10 @@ const KongEncoder = (schema, key)=>{
 };
 
 const KongUiEncoder = (schema)=>{
+  // TODO: Add in field ordering {"ui:order": ["bar", "foo"]}
   if(typeof(schema.fields)==='object' && (schema.type !== 'array')){
-    const properties = Object.keys(schema.fields).reduce((def, fieldKey)=>{
+    const propNames = Object.keys(schema.fields);
+    const properties = propNames.reduce((def, fieldKey)=>{
       const fieldSchema = schema.fields[fieldKey];
       const fieldDef = KongUiEncoder(fieldSchema);
       if(fieldDef){
@@ -117,6 +119,21 @@ const KongUiEncoder = (schema)=>{
       }
       return def;
     }, {});
+    properties['ui:order'] = propNames.sort((propName1, propName2)=>{
+      const propDef1 = schema.fields[propName1];
+      const propDef2 = schema.fields[propName2];
+      const type1 = propDef1.type || 'string';
+      const type2 = propDef2.type || 'string';
+      if(type1 !== type2){
+        if(type1 === 'object' || type1 === 'table' || type1 === 'array'){
+          return 1;
+        }
+        if(type2 === 'object' || type2 === 'table' || type2 === 'array'){
+          return -1;
+        }
+      }
+      return propName1.localeCompare(propName2);
+    });
     return properties;
   }
   switch(schema.type){
