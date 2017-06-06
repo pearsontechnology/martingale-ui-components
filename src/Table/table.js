@@ -4,6 +4,8 @@ import {
   isTheSame
 } from 'martingale-utils';
 import PropTypes from 'prop-types';
+import ReactTable from 'react-table';
+//import 'react-table/react-table.css';
 
 const upperFirst=(s)=>s.charAt(0).toUpperCase()+s.slice(1);
 
@@ -59,11 +61,11 @@ class Table extends Component{
       data: raw
     } = this.state;
     if(!raw){
-      return raw;
+      return [];
     }
     const data = this.props.mapRoot?raw[this.props.mapRoot]:raw;
     if(!data){
-      return data;
+      return [];
     }
     if(typeof(this.props.mapper) === 'function'){
       if(Array.isArray(data)){
@@ -71,7 +73,7 @@ class Table extends Component{
       }
       return this.props.mapper(data);
     }
-    return data;
+    return Array.isArray(data)?data:[];
   }
 
   getDisplayValue(from, data){
@@ -87,7 +89,7 @@ class Table extends Component{
     }
     if(type === 'object'){
       if(from instanceof Date){
-        return from.toString();
+        return from.toISOString();
       }
       if(React.isValidElement(from)){
         return from;
@@ -143,7 +145,7 @@ class Table extends Component{
     };
   }
 
-  getTable(){
+  getTable_old(){
     const data = this.getData();
     if (!data || !data.length){
       return <div />
@@ -162,6 +164,44 @@ class Table extends Component{
         </tbody>
       </BSTable>
     );
+  }
+
+  getTable(){
+    const rawData = this.getData();
+    const columns = rawData.reduce((headers, rec)=>{
+      /*
+      if(typeof(rec)!=='object'){
+        return headers;
+      }
+      */
+      return Object.keys(rec).reduce((headers, header)=>{
+        if ( headers.findIndex((h)=>h.key===header)>-1 ) {
+          return headers;
+        }
+        return headers.concat({
+          key: header,
+          accessor: header,
+          Header: makeCaption(header)
+        });
+      }, headers);
+    }, []);
+    const data = rawData.map((item, rowIndex)=>{
+      return columns.reduce((row, field)=>{
+        const value = field.key==='#'?rowIndex+1:(typeof(item[field.key])!=='undefined'?this.getDisplayValue(item[field.key], item):'');
+        return Object.assign({}, row, {[field.key]: value});
+      }, {});
+    });
+    const defaultFilterMethod = (filter, row, column)=>{
+      const id = filter.pivotId || filter.id;
+      return row[id] !== undefined ? String(row[id]).indexOf(filter.value) !== -1 : true;
+    };
+    return <ReactTable
+      minRows={0}
+      filterable={true}
+      data={data}
+      columns={columns}
+      defaultFilterMethod={defaultFilterMethod}
+    />
   }
 
   render(){
