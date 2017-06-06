@@ -166,14 +166,35 @@ class Table extends Component{
     );
   }
 
+  getFilterValue(from){
+    const type = typeof(from);
+    if(type === 'string'){
+      return from;
+    }
+    if(type === 'number'){
+      return String(from);
+    }
+    if(type === 'boolean'){
+      return from?'True':'False';
+    }
+    if(type === 'object'){
+      if(from instanceof Date){
+        return from.toISOString();
+      }
+      if(React.isValidElement(from)){
+        return String(from);
+      }
+    }
+    if(type === 'function'){
+      return from(data);
+    }
+    return JSON.stringify(from, null, 2);
+  }
+
   getTable(){
+    const getDisplayValue = this.getDisplayValue.bind(this);
     const rawData = this.getData();
     const columns = rawData.reduce((headers, rec)=>{
-      /*
-      if(typeof(rec)!=='object'){
-        return headers;
-      }
-      */
       return Object.keys(rec).reduce((headers, header)=>{
         if ( headers.findIndex((h)=>h.key===header)>-1 ) {
           return headers;
@@ -181,19 +202,17 @@ class Table extends Component{
         return headers.concat({
           key: header,
           accessor: header,
+          Cell({original: data}){
+            return getDisplayValue(data[header], data);
+          },
           Header: makeCaption(header)
         });
       }, headers);
     }, []);
-    const data = rawData.map((item, rowIndex)=>{
-      return columns.reduce((row, field)=>{
-        const value = field.key==='#'?rowIndex+1:(typeof(item[field.key])!=='undefined'?this.getDisplayValue(item[field.key], item):'');
-        return Object.assign({}, row, {[field.key]: value});
-      }, {});
-    });
+    const data = rawData;
     const defaultFilterMethod = (filter, row, column)=>{
       const id = filter.pivotId || filter.id;
-      return row[id] !== undefined ? String(row[id]).indexOf(filter.value) !== -1 : true;
+      return row[id] !== undefined ? this.getFilterValue(row[id]).toLowerCase().indexOf(filter.value.toLowerCase()) !== -1 : true;
     };
     return <ReactTable
       minRows={0}
