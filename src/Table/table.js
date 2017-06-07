@@ -71,7 +71,11 @@ class Table extends Component{
       if(Array.isArray(data)){
         return data.map(this.props.mapper);
       }
-      return this.props.mapper(data);
+      const mappedData = this.props.mapper(data);
+      if(!mappedData){
+        return [];
+      }
+      return mappedData;
     }
     return Array.isArray(data)?data:[];
   }
