@@ -3,13 +3,15 @@ import InfoButton from './Info';
 import DialogButton from './DialogButton';
 import Button from './Button';
 import DeleteButton from './Delete';
-
-//console.log('DialogButton', DialogButton);
+import OptionsButton from './OptionsButton';
+import ButtonToolbar from './ButtonToolbar';
 
 export default {
   Button,
   ConfirmButton,
   DialogButton,
   InfoButton,
-  DeleteButton
+  DeleteButton,
+  OptionsButton,
+  ButtonToolbar
 };

@@ -10,6 +10,7 @@ import Router from './Router';
 import Table from './Table';
 import Text from './Text';
 import JsonView from './JsonView';
+import Menus from './Menus';
 
 module.exports = {
   ...Alerts,
@@ -23,5 +24,6 @@ module.exports = {
   ...Router,
   ...Table,
   ...Text,
-  ...JsonView
+  ...JsonView,
+  ...Menus
 };

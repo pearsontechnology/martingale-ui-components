@@ -4,6 +4,8 @@ import Link from '../Router/routerlink';
 import {getObjectValue} from 'martingale-utils';
 import PropTypes from 'prop-types';
 import DeleteButton from '../Buttons/Delete';
+import OptionsButton from '../Buttons/OptionsButton';
+import MenuItem from '../Menus/MenuItem';
 
 const reToken = /\${([^}]+)}/g;
 const ActionTable = ({mapper, actions=[], ...props})=>{
@@ -18,14 +20,42 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
       return getObjectValue(token, data);
     });
   };
-  const createLinkAction = ({caption, link, btnStyle='default', ...props}, index, data)=>{
+
+  const createDropdownList = ({caption, link, items: listItems = [], btnStyle, ...props}, index, data)=>{
+    const linkTo=replaceTokens(link, data);
+    const displayCaption=replaceTokens(caption, data);
+    const items = listItems.map((item)=>{
+      const {
+        link,
+        caption,
+        ...props
+      } = item;
+      return {
+        link: replaceTokens(link, data),
+        caption: replaceTokens(caption, data),
+        ...props
+      };
+    });
+    return <OptionsButton
+            key={index}
+            caption={displayCaption}
+            to={linkTo}
+            items={items}
+            btnStyle={btnStyle}
+            />;
+  };
+
+  const createLinkAction = ({caption, link, btnStyle='default', items, ...props}, index, data)=>{
+    if(Array.isArray(items)){
+      return createDropdownList({caption, link, btnStyle, items, ...props}, index, data);
+    }
     return (
       <Link
         key={index}
         to={replaceTokens(link, data)}
         className={`btn btn-${btnStyle}`} {...props}
         >
-        {replaceTokens(caption)}
+        {replaceTokens(caption, data)}
       </Link>
     );
   };
