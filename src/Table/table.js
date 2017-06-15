@@ -83,7 +83,7 @@ class Table extends Component{
   getDisplayValue(from, data){
     const type = typeof(from);
     if(type === 'string'){
-      return from;
+      return <div className="hide-overflow">{from}</div>;
     }
     if(type === 'number'){
       return from;
@@ -102,7 +102,10 @@ class Table extends Component{
     if(type === 'function'){
       return from(data);
     }
-    return <pre>{JSON.stringify(from, null, 2)}</pre>;
+    if(typeof(from) !== 'undefined'){
+      return <pre>{JSON.stringify(from, null, 2)}</pre>;
+    }
+    return from;
   }
 
   getTableSettings(rawData){
