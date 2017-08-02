@@ -8,7 +8,7 @@ import OptionsButton from '../Buttons/OptionsButton';
 import MenuItem from '../Menus/MenuItem';
 
 const reToken = /\${([^}]+)}/g;
-const ActionTable = ({mapper, actions=[], ...props})=>{
+const ActionTable = ({mapper, actions=[], columns, ...props})=>{
   const replaceTokens = (source, data)=>{
     if(typeof(source)==='undefined'){
       return source;
@@ -79,7 +79,6 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
     );
   };
   const createComponentAction = ({Component, props}, index, data)=>{
-    console.log(Component, props)
     return <Component {...props} />;
   };
   const createAction = (action, row, index)=>{
@@ -108,13 +107,28 @@ const ActionTable = ({mapper, actions=[], ...props})=>{
     }
     return Object.assign({}, row, {actions: createAction(actions, data)});
   };
-  return <Table mapper={actionMapper} {...props} />;
+  if(columns){
+    const actionsIndex = columns.findIndex((a)=>{
+      if(a === 'actions'){
+        return true;
+      }
+      if(a.value === 'actions'){
+        return true;
+      }
+      return false;
+    });
+    if(actionsIndex===-1){
+      columns.push('actions');
+    }
+  }
+  return <Table mapper={actionMapper} columns={columns} {...props} />;
 };
 
 ActionTable.propTypes = {
   items: PropTypes.array,
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  mapper: PropTypes.func
+  mapper: PropTypes.func,
+  columns: PropTypes.array
 };
 
 export {ActionTable};

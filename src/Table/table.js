@@ -42,7 +42,8 @@ const makeCaption=(src)=>src.replace(/_/g, ' ').replace(/[ \t]+/, ' ').trim().sp
 
 class Table extends Component{
   static propTypes = {
-    items: PropTypes.array
+    items: PropTypes.array,
+    columns: PropTypes.array
   };
 
   constructor(props){
@@ -109,6 +110,7 @@ class Table extends Component{
   }
 
   getTableSettings(rawData){
+    const columns = this.props.columns;
     const data = rawData.map((d)=>{
       if(typeof(d)==='object'){
         if((!(d instanceof Date)) && (!(d instanceof RegExp))){
@@ -119,7 +121,18 @@ class Table extends Component{
         value: d
       };
     });
-    const headers = data.reduce((headers, rec)=>{
+    const headers = columns?columns.map((c)=>{
+      if(typeof(c)==='string'){
+        return {
+          key: c,
+          caption: makeCaption(c)
+        };
+      }
+      return {
+        key: c.value,
+        caption: c.caption || makeCaption(c.value)
+      };
+    }):data.reduce((headers, rec)=>{
       if(typeof(rec)!=='object'){
         return headers;
       }
@@ -201,7 +214,27 @@ class Table extends Component{
   getTable(){
     const getDisplayValue = this.getDisplayValue.bind(this);
     const rawData = this.getData();
-    const columns = rawData.reduce((headers, rec)=>{
+console.log('Columns: ', this.props.columns)
+    const columns = this.props.columns?this.props.columns.map((c)=>{
+      if(typeof(c)==='string'){
+        return {
+          key: c,
+          accessor: c,
+          Cell({original: data}){
+            return getDisplayValue(data[c], data);
+          },
+          Header: makeCaption(c)
+        };
+      }
+      return {
+        key: c.value,
+        accessor: c.value,
+        Cell({original: data}){
+          return getDisplayValue(data[c.value], data);
+        },
+        Header: c.caption || makeCaption(c.value)
+      };
+    }):rawData.reduce((headers, rec)=>{
       return Object.keys(rec).reduce((headers, header)=>{
         if ( headers.findIndex((h)=>h.key===header)>-1 ) {
           return headers;
