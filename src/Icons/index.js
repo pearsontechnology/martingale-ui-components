@@ -28,11 +28,19 @@ import IconUnknown from 'react-icons/lib/fa/question-circle';
 import Icon from 'react-icon-base';
 
 const MakeIcon = ({source, width, height})=>{
+  if(!source){
+    console.error(`MakeIcon called without source`);
+  }
+  if(!width){
+    console.error(`MakeIcon called without width`, source);
+  }
+  if(!height){
+    console.error(`MakeIcon called without height`, source);
+  }
+  const inner = typeof(source)!=='string'?<g>{source}</g>:<g dangerouslySetInnerHTML={{__html: source}}/>
   return (props)=>(
     <Icon viewBox={`0 0 ${width} ${height}`} {...props}>
-      <g>
-        {source}
-      </g>
+      {inner}
     </Icon>
   );
 };
