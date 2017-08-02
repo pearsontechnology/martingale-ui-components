@@ -214,7 +214,6 @@ class Table extends Component{
   getTable(){
     const getDisplayValue = this.getDisplayValue.bind(this);
     const rawData = this.getData();
-console.log('Columns: ', this.props.columns)
     const columns = this.props.columns?this.props.columns.map((c)=>{
       if(typeof(c)==='string'){
         return {
