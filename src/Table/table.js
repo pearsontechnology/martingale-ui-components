@@ -43,7 +43,8 @@ const makeCaption=(src)=>src.replace(/_/g, ' ').replace(/[ \t]+/, ' ').trim().sp
 class Table extends Component{
   static propTypes = {
     items: PropTypes.array,
-    columns: PropTypes.array
+    columns: PropTypes.array,
+    suppress: PropTypes.array
   };
 
   constructor(props){
@@ -109,83 +110,6 @@ class Table extends Component{
     return from;
   }
 
-  getTableSettings(rawData){
-    const columns = this.props.columns;
-    const data = rawData.map((d)=>{
-      if(typeof(d)==='object'){
-        if((!(d instanceof Date)) && (!(d instanceof RegExp))){
-          return d;
-        }
-      }
-      return {
-        value: d
-      };
-    });
-    const headers = columns?columns.map((c)=>{
-      if(typeof(c)==='string'){
-        return {
-          key: c,
-          caption: makeCaption(c)
-        };
-      }
-      return {
-        key: c.value,
-        caption: c.caption || makeCaption(c.value)
-      };
-    }):data.reduce((headers, rec)=>{
-      if(typeof(rec)!=='object'){
-        return headers;
-      }
-      return Object.keys(rec).reduce((headers, header)=>{
-        if ( headers.findIndex((h)=>h.key===header)>-1 ) {
-          return headers;
-        }
-        return headers.concat({
-          key: header,
-          caption: makeCaption(header)
-        });
-      }, headers);
-    }, []);
-    const trHeaders = headers.map((header)=><th key={header.key}>{header.caption}</th>);
-    const tbody = data.map((item, rowIndex)=>{
-      const fields = headers.map((field, index)=>(
-          <td key={index}>
-            {field.key==='#'?rowIndex+1:(typeof(item[field.key])!=='undefined'?this.getDisplayValue(item[field.key], item):'')}
-          </td>
-        ));
-      return (
-        <tr key={rowIndex}>
-          {fields}
-        </tr>
-      );
-    });
-    return {
-      trHeaders,
-      tbody
-    };
-  }
-
-  getTable_old(){
-    const data = this.getData();
-    if (!data || !data.length){
-      return <div />
-    }
-    const {
-      trHeaders,
-      tbody
-    } = this.getTableSettings(Array.isArray(data)?data:[]);
-    return (
-      <BSTable striped bordered condensed hover>
-        <thead>
-          <tr>{trHeaders}</tr>
-        </thead>
-        <tbody>
-          {tbody}
-        </tbody>
-      </BSTable>
-    );
-  }
-
   getFilterValue(from){
     const type = typeof(from);
     if(type === 'string'){
@@ -214,6 +138,7 @@ class Table extends Component{
   getTable(){
     const getDisplayValue = this.getDisplayValue.bind(this);
     const rawData = this.getData();
+    const suppress = Array.isArray(this.props.suppress)?this.props.suppress:[];
     const columns = this.props.columns?this.props.columns.map((c)=>{
       if(typeof(c)==='string'){
         return {
@@ -231,10 +156,13 @@ class Table extends Component{
         Cell({original: data}){
           return getDisplayValue(data[c.value], data);
         },
-        Header: c.caption || makeCaption(c.value)
+        Header: typeof(c.caption)==='undefined'?makeCaption(c.value):c.caption
       };
     }):rawData.reduce((headers, rec)=>{
       return Object.keys(rec).reduce((headers, header)=>{
+        if(suppress.indexOf(header)>-1){
+          return headers;
+        }
         if ( headers.findIndex((h)=>h.key===header)>-1 ) {
           return headers;
         }

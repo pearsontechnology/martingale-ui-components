@@ -128,7 +128,8 @@ ActionTable.propTypes = {
   items: PropTypes.array,
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   mapper: PropTypes.func,
-  columns: PropTypes.array
+  columns: PropTypes.array,
+  suppress: PropTypes.array
 };
 
 export {ActionTable};
