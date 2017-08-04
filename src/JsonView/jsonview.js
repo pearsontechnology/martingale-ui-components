@@ -50,10 +50,11 @@ const PrettyJsonView = ({src, inset=true})=>{
   }
 };
 
-const JsonView = ({json, pretty = false})=>{
-  const view = pretty?<PrettyJsonView src={json} inset={false} />:(
+const JsonView = ({json, data, pretty = false})=>{
+  const src = json || data;
+  const view = pretty?<PrettyJsonView src={src} inset={false} />:(
     <pre>
-      {JSON.stringify(json, null, 2)}
+      {JSON.stringify(src, null, 2)}
     </pre>
   );
   return <div className="jsonView">{view}</div>;
@@ -61,6 +62,7 @@ const JsonView = ({json, pretty = false})=>{
 
 JsonView.propTypes = {
   json: PropTypes.any,
+  data: PropTypes.any,
   pretty: PropTypes.bool
 };
 

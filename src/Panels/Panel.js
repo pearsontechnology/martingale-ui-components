@@ -35,8 +35,10 @@ const Panel = (props)=>{
     style.maxHeight=maxHeight;
     style.overflow=style.overflow||'auto';
   }
+  const Wrapper = (size || lg || md || sm || xs)?Col:({children})=><div>{children}</div>;
+  //<Col {...colProps}>
   return (
-    <Col {...colProps}>
+    <Wrapper {...colProps}>
       <div className={`panel panel-${type}`}>
         {header}
         <div style={style}>
@@ -44,8 +46,9 @@ const Panel = (props)=>{
         </div>
         {footer}
       </div>
-    </Col>
+    </Wrapper>
   );
+  //</Col>
 };
 
 Panel.propTypes = {
