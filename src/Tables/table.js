@@ -45,10 +45,10 @@ class Table extends Component{
     items: PropTypes.array,
     columns: PropTypes.array,
     suppress: PropTypes.array,
-    filterable: PropTypes.boolean,
-    showPagination: PropTypes.boolean,
-    showPaginationBottom: PropTypes.boolean,
-    showPaginationTop: PropTypes.boolean
+    filterable: PropTypes.bool,
+    showPagination: PropTypes.bool,
+    showPaginationBottom: PropTypes.bool,
+    showPaginationTop: PropTypes.bool
   };
 
   constructor(props){

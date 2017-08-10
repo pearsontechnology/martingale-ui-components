@@ -9,19 +9,19 @@ import {
   betterType
 } from 'martingale-utils';
 
-const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true, ...props})=>{
+const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
   const dataType = betterType(data);
   const wrap = (children, {inset})=>{
     if(nowrap){
       return (
-          <div className="dataView">
+          <div className={'dataView level-'+__level}>
             {children}
           </div>
         );
     }
     return (
       <Panel inset={inset}>
-        <div className="dataView">
+        <div className={'dataView level-'+__level}>
           {children}
           {footerContents}
         </div>
@@ -38,18 +38,16 @@ const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true
   if(dataType === 'object'){
     const keys = Object.keys(data);
     const children = keys.map((key)=>{
-      const value = <ViewContents data={data[key]} inset={false} nowrap={true} />;
+      const value = <ViewContents data={data[key]} inset={false} nowrap={true} __level={__level+1} />;
       return [
-        <dt key={key}>{key}</dt>,
-        <dd key={`${key}-value`}>{value}</dd>
+        <dt key={key} className={'level-'+__level}>{key}</dt>,
+        <dd key={`${key}-value`} className={'level-'+__level}>{value}</dd>
       ];
     });
-    const objectList = <dl className={nowrap?'inset-children':''}>{children}</dl>;
+    const objectList = <dl className={nowrap?'inset-children level-'+__level:'level-'+__level}>{children}</dl>;
     return wrap(objectList, {inset});
   }
-  console.log(typeof(data), data)
-  //return wrap(<JsonView json={data} inset={true} {...props} />, {inset});
-  return wrap(<span className="inset">{data.toString?data.toString():`Can't convert type "${typeof(data)}"`}</span>, {inset});
+  return wrap(<span className={'inset level-'+__level}>{data.toString?data.toString():`Can't convert type "${typeof(data)}"`}</span>, {inset});
 };
 
 const DataView = (props)=>{
