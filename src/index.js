@@ -7,10 +7,11 @@ import Icons from './Icons';
 import ListGroup from './ListGroup';
 import Panels from './Panels';
 import Router from './Router';
-import Table from './Table';
+import Table from './Tables';
 import Text from './Text';
 import JsonView from './JsonView';
 import Menus from './Menus';
+import DataViews from './dataview';
 
 module.exports = {
   ...Alerts,
@@ -25,5 +26,6 @@ module.exports = {
   ...Table,
   ...Text,
   ...JsonView,
-  ...Menus
+  ...Menus,
+  ...DataViews
 };
