@@ -44,7 +44,11 @@ class Table extends Component{
   static propTypes = {
     items: PropTypes.array,
     columns: PropTypes.array,
-    suppress: PropTypes.array
+    suppress: PropTypes.array,
+    filterable: PropTypes.boolean,
+    showPagination: PropTypes.boolean,
+    showPaginationBottom: PropTypes.boolean,
+    showPaginationTop: PropTypes.boolean
   };
 
   constructor(props){
@@ -181,12 +185,22 @@ class Table extends Component{
       const id = filter.pivotId || filter.id;
       return row[id] !== undefined ? this.getFilterValue(row[id]).toLowerCase().indexOf(filter.value.toLowerCase()) !== -1 : true;
     };
+    const {
+      filterable = true,
+      showPagination = true,
+      showPaginationBottom=true,
+      showPaginationTop=false
+    } = this.props;
     return <ReactTable
+      className="-striped -highlight"
       minRows={0}
-      filterable={true}
+      filterable={filterable}
       data={data}
       columns={columns}
       defaultFilterMethod={defaultFilterMethod}
+      showPagination={showPagination}
+      showPaginationTop={showPaginationTop}
+      showPaginationBottom={showPaginationBottom}
     />
   }
 
