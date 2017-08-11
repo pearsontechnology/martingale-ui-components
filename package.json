@@ -34,6 +34,6 @@
     "react-overlays": "^0.7.0",
     "react-router-dom": "^4.1.1",
     "react-table": "^6.0.5",
-    "tcomb-form": "^0.9.16"
+    "js-yaml": "^3.7.0"
   }
 }

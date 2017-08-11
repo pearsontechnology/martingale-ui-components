@@ -9,6 +9,17 @@ import {
   betterType
 } from 'martingale-utils';
 
+const toString = (data)=>{
+  const type = betterType(data);
+  if(type === 'null'){
+    return 'null';
+  }
+  if(type === 'undefined'){
+    return 'undefined';
+  }
+  return data.toString?data.toString():`Can't convert type "${typeof(data)}"`;
+};
+
 const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
   const dataType = betterType(data);
   const wrap = (children, {inset})=>{
@@ -47,14 +58,15 @@ const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true
     const objectList = <dl className={nowrap?'inset-children level-'+__level:'level-'+__level}>{children}</dl>;
     return wrap(objectList, {inset});
   }
-  return wrap(<span className={'inset level-'+__level}>{data.toString?data.toString():`Can't convert type "${typeof(data)}"`}</span>, {inset});
+  return wrap(<span className={'inset level-'+__level}>{toString(data)}</span>, {inset});
 };
 
 const DataView = (props)=>{
   const {
       inset,
       data,
-      footerContents
+      footerContents,
+      View
     } = props;
   if(typeof(data)==='undefined'){
     return (
@@ -62,6 +74,9 @@ const DataView = (props)=>{
           <span className="loading">Loading...</span>
         </Panel>
       );
+  }
+  if(View){
+    return <View {...props} />;
   }
   return <ViewContents {...props} />;
 };

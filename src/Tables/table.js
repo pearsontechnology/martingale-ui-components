@@ -5,6 +5,7 @@ import {
 } from 'martingale-utils';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
+import YAML from 'js-yaml';
 //import 'react-table/react-table.css';
 
 const upperFirst=(s)=>s.charAt(0).toUpperCase()+s.slice(1);
@@ -109,7 +110,8 @@ class Table extends Component{
       return from(data);
     }
     if(typeof(from) !== 'undefined'){
-      return <pre>{JSON.stringify(from, null, 2)}</pre>;
+      //return <pre>{JSON.stringify(from, null, 2)}</pre>;
+      return <pre>{YAML.safeDump(from, {indent: 2})}</pre>;
     }
     return from;
   }
@@ -157,6 +159,7 @@ class Table extends Component{
       return {
         key: c.value,
         accessor: c.value,
+        width: c.width,
         Cell({original: data}){
           return getDisplayValue(data[c.value], data);
         },
