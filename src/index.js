@@ -8,6 +8,7 @@ import ListGroup from './ListGroup';
 import Panels from './Panels';
 import Router from './Router';
 import Table from './Tables';
+import Tabs from './tabs';
 import Text from './Text';
 import JsonView from './JsonView';
 import YamlView from './YamlView';
@@ -25,6 +26,7 @@ module.exports = {
   ...Panels,
   ...Router,
   ...Table,
+  ...Tabs,
   ...Text,
   ...JsonView,
   ...YamlView,
