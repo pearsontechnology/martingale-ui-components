@@ -7,6 +7,14 @@ import {
 import Panel from '../Panels/Panel';
 import PropTypes from 'prop-types';
 
+const TabContent = ({children, inset = true})=>{
+  return (
+    <div className={`tab contents ${inset?'inset':''}`}>
+      {children}
+    </div>
+  );
+};
+
 class Tabs extends React.Component{
   static propTypes = {
     tabs: PropTypes.array,
@@ -27,16 +35,17 @@ class Tabs extends React.Component{
       selected
     } = this.state;
     const {
-      tabs: tabsList = []
+      tabs: tabsList = [],
+      inset = true
     } = this.props;
     const tabs = tabsList.map(({title}, index)=><NavItem key={index} eventKey={index} title={title}>{title}</NavItem>);
-    const visibleTab = tabsList[selected].children;
+    const visibleTab = tabsList[selected];
     return (
         <Panel>
           <Nav bsStyle="tabs" activeKey={selected} onSelect={this.handleSelect.bind(this)}>
             {tabs}
           </Nav>
-          {visibleTab}
+          <TabContent inset={inset} {...visibleTab} />
         </Panel>
       );
   }

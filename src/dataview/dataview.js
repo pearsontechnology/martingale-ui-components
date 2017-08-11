@@ -4,6 +4,8 @@ import Panel from '../Panels/Panel';
 import {Table} from '../Tables/table';
 import {ActionTable} from '../Tables/actiontable';
 import JsonView from '../JsonView/jsonview';
+import YamlView from '../YamlView/yamlview';
+import {Tabs} from '../tabs/tabs';
 
 import {
   betterType
@@ -20,7 +22,7 @@ const toString = (data)=>{
   return data.toString?data.toString():`Can't convert type "${typeof(data)}"`;
 };
 
-const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
+const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
   const dataType = betterType(data);
   const wrap = (children, {inset})=>{
     if(nowrap){
@@ -30,13 +32,33 @@ const ViewContents = ({data, actions, footerContents, nowrap=false, inset = true
           </div>
         );
     }
-    return (
-      <Panel inset={inset}>
-        <div className={'dataView level-'+__level}>
+    if(!viewOptions){
+      return (
+        <Panel inset={inset}>
           {children}
           {footerContents}
-        </div>
-      </Panel>
+        </Panel>
+      );
+    }
+    const tabs = [
+      {
+        title: 'Default',
+        children: children
+      },
+      {
+        title: 'JSON',
+        children: <JsonView data={data} />
+      },
+      {
+        title: 'YAML',
+        children: <YamlView data={data} />
+      }
+    ];
+    return (
+      <div>
+        <Tabs inset={inset} tabs={tabs} inset={false} />
+        {footerContents}
+      </div>
     );
   };
   if(dataType === 'array'){
