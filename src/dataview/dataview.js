@@ -43,7 +43,7 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
     const tabs = [
       {
         title: 'Default',
-        children: children
+        children
       },
       {
         title: 'JSON',
@@ -64,9 +64,9 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
   if(dataType === 'array'){
     const showPagination = data.length > 20;
     if(actions){
-      return wrap(<ActionTable data={data} actions={actions} filterable={false} showPagination={showPagination} {...props} />, {inset: false});
+      return wrap(<ActionTable data={data} actions={actions} filterable={showPagination} showPagination={showPagination} {...props} />, {inset: false});
     }
-    return wrap(<Table data={data} filterable={false} showPagination={showPagination} {...props} />, {inset: false});
+    return wrap(<Table data={data} filterable={showPagination} showPagination={showPagination} {...props} />, {inset: false});
   }
   if(dataType === 'object'){
     const keys = Object.keys(data);
