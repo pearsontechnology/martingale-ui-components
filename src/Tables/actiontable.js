@@ -3,22 +3,41 @@ import {Table} from './table';
 import Link from '../Router/routerlink';
 import {getObjectValue} from 'martingale-utils';
 import PropTypes from 'prop-types';
+import Button from '../Buttons/Button';
 import DeleteButton from '../Buttons/Delete';
 import OptionsButton from '../Buttons/OptionsButton';
+import ConfirmButton from '../Buttons/Confirm';
 import MenuItem from '../Menus/MenuItem';
+import {merge, fetch} from 'martingale-utils';
+import { withRouter } from 'react-router-dom';
 
 const reToken = /\${([^}]+)}/g;
-const ActionTable = ({mapper, actions=[], columns, ...props})=>{
+const ActionTableView = ({history, mapper, actions=[], columns, ...props})=>{
   const replaceTokens = (source, data)=>{
-    if(typeof(source)==='undefined'){
+    const type = typeof(source);
+    if(type==='undefined'){
       return source;
     }
-    if(typeof(source)==='function'){
+    if(type==='function'){
       return source(data);
     }
-    return source.replace(reToken, (full, token)=>{
-      return getObjectValue(token, data);
-    });
+    if(Array.isArray(source)){
+      return source.map(item=>replaceTokens(item, data));
+    }
+    if(source && type==='object'){
+      const keys = Object.keys(source);
+      return keys.reduce((o, key)=>{
+        const value = replaceTokens(source[key], data);
+        o[key] = value;
+        return o;
+      }, {});
+    }
+    if(type==='string'){
+      return source.replace(reToken, (full, token)=>{
+        return getObjectValue(token, data);
+      });
+    }
+    return source;
   };
 
   const createDropdownList = ({caption, link, items: listItems = [], btnStyle, ...props}, index, data)=>{
@@ -59,6 +78,38 @@ const ActionTable = ({mapper, actions=[], columns, ...props})=>{
       </Link>
     );
   };
+
+  const createFetchAction = (rawProps, index, data)=>{
+      const props = replaceTokens(rawProps, data);
+      const {
+          caption,
+          message = '',
+          title = '',
+          successUrl = window.location.pathname,
+          fetch: options = {},
+          ...rest
+        } = props;
+      const urlOptions = typeof(options)==='string'?{
+          method: 'post',
+          url: options
+        }:options;
+      const complete = (err)=>{
+        if(err){
+          throw err;
+        }
+        return history.push(successUrl);
+      };
+      const fetchOptions = merge({method: 'post'}, urlOptions, {callback: complete});
+      const clickHandler = (e)=>{
+        e && e.preventDefault && e.preventDefault();
+        fetch(fetchOptions);
+      };
+      if(message){
+        return <ConfirmButton key={index} onYes={clickHandler} title={title} caption={caption} {...rest}>{message}</ConfirmButton>;
+      }
+      return <Button onClick={clickHandler} key={index} {...rest}>{caption}</Button>;
+    };
+
   const createDeleteAction = ({
     caption='Delete',
     delete: deleteTarget,
@@ -87,6 +138,9 @@ const ActionTable = ({mapper, actions=[], columns, ...props})=>{
     }
     if(action.link){
       return createLinkAction(action, index, row);
+    }
+    if(action.fetch){
+      return createFetchAction(action, index, row);
     }
     if(action.delete){
       return createDeleteAction(action, index, row);
@@ -124,12 +178,14 @@ const ActionTable = ({mapper, actions=[], columns, ...props})=>{
   return <Table mapper={actionMapper} columns={columns} {...props} />;
 };
 
-ActionTable.propTypes = {
+ActionTableView.propTypes = {
   items: PropTypes.array,
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   mapper: PropTypes.func,
   columns: PropTypes.array,
   suppress: PropTypes.array
 };
+
+const ActionTable = withRouter(ActionTableView);
 
 export {ActionTable};
