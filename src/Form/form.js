@@ -215,18 +215,21 @@ class BaseForm extends Component{
     const jsFormData = (stripInvalid && data)?
         this.stripInvalid(data, schema):
         data;
+    const form = formSchema?(
+          <JsonSchemaForm
+            uiSchema={uiSchema}
+            schema={schema}
+            formData={jsFormData}
+            onSubmit={this.onSubmit.bind(this)}
+            {...props}
+            >
+            {children}
+          </JsonSchemaForm>
+        ):undefined;
     return (
       <div>
         {errors}
-        <JsonSchemaForm
-          uiSchema={uiSchema}
-          schema={schema}
-          formData={jsFormData}
-          onSubmit={this.onSubmit.bind(this)}
-          {...props}
-          >
-          {children}
-        </JsonSchemaForm>
+        {form}
       </div>
     );
   }
