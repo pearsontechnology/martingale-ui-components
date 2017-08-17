@@ -6,6 +6,7 @@ import {ActionTable} from '../Tables/actiontable';
 import JsonView from '../JsonView/jsonview';
 import YamlView from '../YamlView/yamlview';
 import {Tabs} from '../tabs/tabs';
+import Alert from '../Alerts/Alerts';
 
 import {
   betterType
@@ -96,6 +97,10 @@ const DataView = (props)=>{
           <span className="loading">Loading...</span>
         </Panel>
       );
+  }
+console.log(data)
+  if(data.statusCode && data.error && data.message){
+    return <Alert type='danger'><strong>{data.error} ({data.statusCode}):</strong> {data.message}</Alert>
   }
   if(View){
     return <View {...props} />;
