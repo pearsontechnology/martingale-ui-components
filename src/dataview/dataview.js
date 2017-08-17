@@ -98,7 +98,6 @@ const DataView = (props)=>{
         </Panel>
       );
   }
-console.log(data)
   if(data.statusCode && data.error && data.message){
     return <Alert type='danger'><strong>{data.error} ({data.statusCode}):</strong> {data.message}</Alert>
   }
