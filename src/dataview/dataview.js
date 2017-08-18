@@ -23,6 +23,20 @@ const toString = (data)=>{
   return data.toString?data.toString():`Can't convert type "${typeof(data)}"`;
 };
 
+const getDefaultKey = (columns = [], defaultValue = '')=>{
+  if(!columns || columns.length===0){
+    return defaultValue;
+  }
+  const first = columns[0];
+  if(typeof(first)==='string'){
+    return first;
+  }
+  if(first.caption){
+    return first.caption;
+  }
+  return defaultValue;
+};
+
 const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
   const dataType = betterType(data);
   const wrap = (children, {inset})=>{
@@ -64,6 +78,13 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
   };
   if(dataType === 'array'){
     const showPagination = data.length > 20;
+    const key = getDefaultKey(props.columns);
+    data = data.map((item)=>{
+      if(typeof(item)==='string'){
+        return {[key]: item};
+      }
+      return item;
+    });
     if(actions){
       return wrap(<ActionTable data={data} actions={actions} filterable={showPagination} showPagination={showPagination} {...props} />, {inset: false});
     }
