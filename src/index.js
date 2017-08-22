@@ -10,6 +10,7 @@ import Router from './Router';
 import Table from './Tables';
 import Tabs from './tabs';
 import Text from './Text';
+import TreeViews from './treeviews';
 import JsonView from './JsonView';
 import YamlView from './YamlView';
 import Menus from './Menus';
@@ -31,5 +32,6 @@ module.exports = {
   ...JsonView,
   ...YamlView,
   ...Menus,
-  ...DataViews
+  ...DataViews,
+  ...TreeViews
 };
