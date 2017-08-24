@@ -15,6 +15,9 @@ import JsonView from './JsonView';
 import YamlView from './YamlView';
 import Menus from './Menus';
 import DataViews from './dataview';
+import HTML from './html';
+import * as DebugTools from './debugtools';
+import * as Listing from './listing';
 
 module.exports = {
   ...Alerts,
@@ -33,5 +36,8 @@ module.exports = {
   ...YamlView,
   ...Menus,
   ...DataViews,
-  ...TreeViews
+  ...TreeViews,
+  ...DebugTools,
+  ...Listing,
+  HTML
 };
