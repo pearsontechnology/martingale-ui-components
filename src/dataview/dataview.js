@@ -120,7 +120,7 @@ const DataView = (props)=>{
       );
   }
   if(data.statusCode && data.error && data.message){
-    return <Alert type='danger'><strong>{data.error} ({data.statusCode}):</strong> {data.message}</Alert>
+    return <Alert type='danger'><strong>{data.error} ({data.statusCode}):</strong> {data.message}</Alert>;
   }
   if(View){
     return <View {...props} />;
