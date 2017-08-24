@@ -18,6 +18,7 @@ import DataViews from './dataview';
 import HTML from './html';
 import * as DebugTools from './debugtools';
 import * as Listing from './listing';
+import * as Errors from './error';
 
 module.exports = {
   ...Alerts,
@@ -39,5 +40,6 @@ module.exports = {
   ...TreeViews,
   ...DebugTools,
   ...Listing,
+  ...Errors,
   HTML
 };
