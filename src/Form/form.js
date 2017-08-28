@@ -133,12 +133,15 @@ class BaseForm extends Component{
       return onSubmit(data);
     }
     if(submitTo){
+      const submitOptions = typeof(submitTo)==='string'?{url: submitTo}:submitTo;
       const {
         method = 'POST',
         url,
-        mapper
-      } = typeof(submitTo)==='string'?{url: submitTo}:submitTo;
-      return fetchJson({
+        mapper,
+        ...fetchOptions,
+      } = submitOptions;
+
+      return fetchJson(Object.assign(fetchOptions, {
         url,
         method,
         payload: mapper?mapper(data):data,
@@ -151,7 +154,7 @@ class BaseForm extends Component{
           }
           this.navigateToSuccess(data);
         }
-      });
+      }));
     }
     this.navigateToSuccess(data);
   }
