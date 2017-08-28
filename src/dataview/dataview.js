@@ -70,10 +70,7 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
       }
     ];
     return (
-      <div>
-        <Tabs inset={inset} tabs={tabs} inset={false} />
-        {footerContents}
-      </div>
+      <Tabs inset={inset} tabs={tabs} inset={false} footer={footerContents} />
     );
   };
   if(dataType === 'array'){

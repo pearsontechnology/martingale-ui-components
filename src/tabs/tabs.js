@@ -36,7 +36,8 @@ class Tabs extends React.Component{
     } = this.state;
     const {
       tabs: tabsList = [],
-      inset = true
+      inset = true,
+      footer
     } = this.props;
     const tabs = tabsList.map(({title}, index)=><NavItem key={index} eventKey={index} title={title}>{title}</NavItem>);
     const visibleTab = tabsList[selected];
@@ -46,6 +47,7 @@ class Tabs extends React.Component{
             {tabs}
           </Nav>
           <TabContent inset={inset} {...visibleTab} />
+          {footer}
         </Panel>
       );
   }
