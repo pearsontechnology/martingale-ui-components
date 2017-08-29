@@ -141,9 +141,10 @@ class BaseForm extends Component{
         mapper,
         ...fetchOptions,
       } = submitOptions;
+      const targetUrl = typeof(url)==='function'?url(data):url;
 
       return fetchJson(Object.assign(fetchOptions, {
-        url,
+        url: targetUrl,
         method,
         payload: mapper?mapper(data):data,
         callback: (err, payload, res, contentType)=>{
