@@ -193,7 +193,6 @@ class BaseForm extends Component{
     }
     if(theData && dataRoot){
       return getObjectValue(dataRoot, theData);
-      //return theData[dataRoot];
     }
     return theData;
   }
