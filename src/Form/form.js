@@ -128,7 +128,8 @@ class BaseForm extends Component{
     } = this.props;
     const rawOrgData = this.getPropData();
     const mappedData = mapper?mapper(formData):formData;
-    const data = Object.assign({}, this.getPropData(true), mappedData);
+    const rootedData = dataRoot?{[dataRoot]: mappedData}:mappedData;
+    const data = Object.assign({}, this.getPropData(true), rootedData);
     if(onSubmit){
       return onSubmit(data);
     }
