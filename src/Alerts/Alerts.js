@@ -83,6 +83,19 @@ const DismissAfter = (Wrap)=>{
   };
 };
 
+/**
+ * Displays an alert box with optional dismiss button and/or self dismissing
+ * @name Alert
+ * @param {object} props
+ * @param {string} props.bsClass - Bootstrap Classname
+ * @param {array} props.children - Array of components to put inside the alert
+ * @param {string} props.closeLabel - Text to place in the close button
+ * @param {number} props.dismissAfter - Dismiss the alert after x milliseconds has elapsed
+ * @param {boolean} props.dismissable - If true the place a close button on the alert and allow user to dismiss the alert
+ * @param {function} props.onDismiss - Callback when the alert is dismissed
+ * @param {('info'|'success'|'warning'|'danger')} props.type - Type of alert to be shown
+ */
+
 const AlertWrapper = (props)=>{
   const {
     dismissable = false,

@@ -22,6 +22,24 @@ yarn test
 yarn compile
 ```
 
+# API Documentation
+
+See [docs/readme.md](docs/readme.md) for the API Documentation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Components
 
 ## ActionTable

@@ -26,6 +26,13 @@ const defaultActions=({onYes, onNo})=>{
   };
 };
 
+/**
+ * Generates a button that when clicked prompts the user with for a Yes/No answer.  Executs onYes/No when button is clicked.
+ * @param {object} props
+ * @param {function} props.onYes - Callbacked when Yes button is clicked
+ * @param {function} props.onNo - Callbacked when No button is clicked
+ * @extends DialogButton
+ */
 const ConfirmButton = ({onYes, onNo, actions: passedActions, ...props})=>{
   const actions = passedActions || defaultActions({onYes, onNo});
   return (

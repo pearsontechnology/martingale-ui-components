@@ -2,6 +2,10 @@ import React from 'react';
 import {Button} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+/**
+ * Generates an HTML Button
+ * @name Button
+ */
 const UiButton = (props)=>{
   const {
     children,

@@ -5,6 +5,17 @@ import Dialog from '../Dialogs/Dialog';
 
 import Button from './Button';
 
+/**
+ * Generates a button that when clicked prompts the user with a dialog.
+ * @param {object} props
+ * @param {function} props.onCancel - Callbacked when user cancels the dialog
+ * @param {array} props.children - Array of children to be placed into the body of the dialog
+ * @param {string} props.caption - Caption to put on the button
+ * @param {string} props.title - Title of the dialog when it is displayed
+ * @param {string} props.message - Message to be displayed (instead of using children) inside the dialog
+ * @param {boolean} props.visible - Show the dialog
+ * @param {array} props.actions - Array of actions to place in the dialog
+*/
 class DialogButton extends React.Component{
   handleCancel(dialog){
     if(this.props.onCancel){

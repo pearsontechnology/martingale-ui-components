@@ -6,6 +6,17 @@ import Button from './Confirm';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+/**
+ * Generates a button that when clicked performs an HTTP DELETE on the target.
+ * @name DeleteButton
+ * @param {object} props
+ * @param {string} props.caption - Text to display on the button
+ * @param {string} props.title - Title to place in the confirmation dialog box
+ * @param {string} props.message - Text to display within the dialog box
+ * @param {string} props.successUrl - URL to navigate to on a successful delete operation
+ * @extends Button
+ */
+
 class DButton extends Component{
   performDelete(){
     const {

@@ -24,6 +24,15 @@ class OptionsButtonMenu extends React.Component{
   }
 };
 
+/**
+ * Generates a drop down button with a default action that navigates to a location.
+ * @param {object} props
+ * @param {string} props.caption - Caption to put on the button
+ * @param {array} props.items - Array of children to be placed in the dropdown when shown
+ * @param {string} props.to - Target to navitgate to when clicked
+ * @extends Button
+*/
+
 class OptionsButton extends React.Component{
   constructor({expanded = false}){
     super();

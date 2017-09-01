@@ -12,16 +12,20 @@
     "compile": "NODE_ENV=production babel src --out-dir lib",
     "pretest": "npm run compile",
     "prepublish": "npm run test",
-    "start": "nodemon --watch src --exec 'yarn compile'"
+    "start": "nodemon --watch src --exec 'yarn compile'",
+    "doc_dev": "NODE_ENV=production documentation serve -w src/index.js",
+    "doc": "mkdir -p docs && NODE_ENV=production documentation build src/index.js --format md > docs/readme.md"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^19.0.0",
     "babel-preset-react-app": "^2.2.0",
+    "documentation": "^5.2.2",
     "jest": "^19.0.2",
     "jsonschema": "^1.1.1",
     "nodemon": "^1.11.0",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "yargs": "^8.0.2"
   },
   "dependencies": {
     "martingale-utils": "^0.0.1",
