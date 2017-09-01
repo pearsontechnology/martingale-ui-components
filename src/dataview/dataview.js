@@ -102,6 +102,14 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
   return wrap(<span className={'inset level-'+__level}>{toString(data)}</span>, {inset});
 };
 
+/**
+ * Creates an appropriate view of the passed in data, for Arrays will display a table, for Objects will display a hybrid display.
+ * @param {object} props
+ * @param {boolean} props.inset - Should the content be inset
+ * @param {any} props.data - Data to be displayed on the screen
+ * @param {any} props.footerContents - Any contents that should be placed in the footer of the view
+ * @param {Component} props.View - Force the view by supplying the type
+ */
 const DataView = (props)=>{
   const {
       inset,

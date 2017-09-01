@@ -162,6 +162,21 @@ const KongUiEncoder = (schema)=>{
   return {};
 };
 
+/**
+ * JsonSchema-Form - more info at https://github.com/mozilla-services/react-jsonschema-form
+ * @name Form
+ * @param {object} props
+ * @param {object} props.schema - Kong Schema for the data to be edited
+ * @param {any} props.data - Default values to be displayed within the form
+ * @param {any} props.dataRoot - Root key into data to use to source values for form
+ * @param {string} props.successUrl - URL to navigate to upon a succesful submit of the form
+ * @param {string|object} props.submitTo - URL or URL Options to submit the form to
+ * @param {string} props.submitTo.url - URL to send to
+ * @param {string} props.submitTo.method - HTTP Method to submit with (default POST)
+ * @param {string} props.submitTo.headers - HTTP Headers to append to the request
+ * @param {function} props.mapper - Used to mutate data returned from the form before sending it to the submitTo destination
+ * @extends Form
+ */
 const KongForm = ({schemaEncoder=KongEncoder, uiSchemaEncoder=KongUiEncoder, ...props})=>(
   <Form schemaEncoder={schemaEncoder} uiSchemaEncoder={uiSchemaEncoder} {...props} />
 );

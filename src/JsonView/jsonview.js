@@ -50,6 +50,13 @@ const PrettyJsonView = ({src, inset=true})=>{
   }
 };
 
+/**
+ * Renders a pretty or JSON.stringify(data, null, 2) view of data
+ * @param {object} props
+ * @param {object} props.json - Data to be displayed
+ * @param {object} props.data - Data to be displayed
+ * @param {boolean} props.pretty - If true then renders a tree like strucutre of the data, if false then renders a pre wrapped JSON.stringify() version of the data
+ */
 const JsonView = ({json, data, pretty = false})=>{
   const src = json || data;
   const view = pretty?<PrettyJsonView src={src} inset={false} />:(

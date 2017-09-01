@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Grid container for rows and columns
+ */
 const ContainerFluid = ({children})=>(
   <div className="container-fluid">
     {children}

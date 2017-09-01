@@ -2,6 +2,12 @@ import React from 'react';
 
 import Alert from '../Alerts/Alerts';
 
+/**
+ * Creates an Alert containing details of the passed in error
+ * @param {object} props
+ * @param {object} props.error - Error to be displayed within the alert
+ */
+
 const Error = ({error})=>{
   if(typeof(error)==='string'){
     return <Alert type='danger'>{error}</Alert>;

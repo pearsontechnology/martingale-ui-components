@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Item to be placed within a ListGroup
+ * @name ListGroupItem
+ * @param {object} props
+ * @param {object} props.link - Link to where clicking the item should take the user
+ * @param {object} props.badge - Icon or Badge to display next to the item
+ * @param {array} props.children - Children to place in the item
+ */
 const Item = (props)=>{
   const {
     link,

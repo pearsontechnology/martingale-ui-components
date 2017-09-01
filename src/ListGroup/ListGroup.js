@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * Displays a grouped listing of items
+ * @param {object} props
+ * @param {array} props.children - Children to place in the list
+ */
 const ListGroup = (props)=>{
   const {
     children

@@ -5,13 +5,17 @@ import {
   Row
 } from 'react-bootstrap';
 
-const GridRow = (someProps)=>{
+
+/**
+ * A Grid row, typically contains Col's
+ */
+const GridRow = (props)=>{
   const {
     children,
-    ...props
-  } = someProps;
+    ...compProps
+  } = props;
   return (
-    <Row {...props}>
+    <Row {...compProps}>
       {children}
     </Row>
   );
