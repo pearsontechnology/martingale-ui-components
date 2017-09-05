@@ -186,6 +186,12 @@ ActionTableView.propTypes = {
   suppress: PropTypes.array
 };
 
+/**
+ * A table with standard actions in the last column for each row
+ * @param {object} props
+ * @param {array} props.actions - List of actions to be displayed in the last column
+ * @extends Table
+ */
 const ActionTable = withRouter(ActionTableView);
 
 export {ActionTable};

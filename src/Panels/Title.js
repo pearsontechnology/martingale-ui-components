@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * A panel for displaying a title within a panel
+ * @param {object} props
+ * @param {string} props.title - The title
+ * @param {object} props.children - Children to be placed within the title
+ */
+
 const PanelHeader = (props)=>{
   const {
     title,

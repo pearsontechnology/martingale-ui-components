@@ -10,6 +10,18 @@ import classnames from 'classnames';
 
 const iconWrapper=({icon, size})=>React.createElement(icon, {size});
 
+/**
+ * A panel for displaying a title, icon, and a count.
+ * @param {object} props
+ * @param {string} props.className - Additional class names to apply to the container
+ * @param {number} props.count - Number to be displayed
+ * @param {string} props.color - Color for the container (default, primary, success, info, warning, danger)
+ * @param {string} props.link - Page user should be taken to when clicked
+ * @param {string} props.title - Text to be displayed with icon and count
+ * @param {string} props.more - Additional text to be displayed below the icon, count and title
+ * @param {string} props.Icon - The icon to be displayed alongside the count
+ */
+
 const CountPanel = (props)=>{
   const {
     className: addlClasses = '',

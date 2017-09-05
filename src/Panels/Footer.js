@@ -2,6 +2,13 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+/**
+ * A footer that can be placed within a panel
+ * @param {object} props
+ * @param {string} props.className - Additional class names to apply to the container
+ * @param {object} props.Component - Component to be placed within the panel footer
+ * @param {object} props.children - Children to be placed within the panel footer
+ */
 const PanelFooter = (props)=>{
   const {
     className = '',

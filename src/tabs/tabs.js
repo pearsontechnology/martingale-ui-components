@@ -15,6 +15,14 @@ const TabContent = ({children, inset = true})=>{
   );
 };
 
+/**
+ * Renders a section of tabs and proper content when a tab is selected
+ * @param {object} props
+ * @param {array} props.tabs - The items to be displayed within the table
+ * @param {array} props.tabs.title - Title of the tab
+ * @param {array} props.tabs.children - Children displayed when tab is selected
+ * @param {number} props.selected - Number of currently selected tab
+ */
 class Tabs extends React.Component{
   static propTypes = {
     tabs: PropTypes.array,

@@ -41,6 +41,17 @@ const upperIt=(s)=>{
 
 const makeCaption=(src)=>src.replace(/_/g, ' ').replace(/[ \t]+/, ' ').trim().split(' ').map(upperIt).join(' ');
 
+/**
+ * Displays a table on the screen from the provided items.  Calculates the columns based on the passed in items keys.
+ * @param {object} props
+ * @param {array} props.items - The items to be displayed within the table
+ * @param {array} props.columns - If specified then show only the columns listed
+ * @param {array} props.suppress - Field names to not display within the table
+ * @param {boolean} props.filterable - If true the allow contents to be filtered by column
+ * @param {boolean} props.showPagination - Show the pagination controls
+ * @param {boolean} props.showPaginationTop - If showPagination is true show the top pagination controls
+ * @param {boolean} props.showPaginationBottom - If showPagination is true show the bottom pagination controls
+ */
 class Table extends Component{
   static propTypes = {
     items: PropTypes.array,
