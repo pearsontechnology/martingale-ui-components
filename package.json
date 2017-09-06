@@ -17,27 +17,29 @@
     "doc": "mkdir -p docs && NODE_ENV=production documentation build src/index.js --format md > docs/readme.md"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-jest": "^19.0.0",
     "babel-preset-react-app": "^2.2.0",
-    "documentation": "^5.2.2",
+    "documentation": "^5.3.0",
     "jest": "^19.0.2",
-    "jsonschema": "^1.1.1",
-    "nodemon": "^1.11.0",
-    "react-test-renderer": "^15.5.4",
+    "jsonschema": "^1.2.0",
+    "nodemon": "^1.12.0",
+    "react-test-renderer": "^15.6.1",
     "yargs": "^8.0.2"
   },
   "dependencies": {
+    "js-yaml": "^3.9.1",
+    "markdown-it": "^8.4.0",
+    "marked": "^0.3.6",
     "martingale-utils": "^0.0.1",
-    "react": "^15.5.4",
-    "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.5.4",
-    "react-icons": "^2.2.3",
+    "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
+    "react-dom": "^15.6.1",
+    "react-icons": "^2.2.5",
     "react-jsonschema-form": "^0.48.2",
     "react-modal-bootstrap": "^1.1.1",
     "react-overlays": "^0.7.0",
-    "react-router-dom": "^4.1.1",
-    "react-table": "^6.0.5",
-    "js-yaml": "^3.7.0"
+    "react-router-dom": "^4.2.2",
+    "react-table": "^6.5.3"
   }
 }

@@ -33,6 +33,7 @@
 -   [MenuItem](#menuitem)
 -   [DataView](#dataview)
 -   [HTML](#html)
+-   [MarkDown](#markdown)
 -   [DebugPanel](#debugpanel)
 -   [Listing](#listing)
 -   [Error](#error)
@@ -103,10 +104,6 @@ Generates a button that when clicked prompts the user with a dialog.
 
 Generates an HTML Button
 
-**Parameters**
-
--   `props`  
-
 ## DeleteButton
 
 **Extends Button**
@@ -138,10 +135,6 @@ Generates a drop down button with a default action that navigates to a location.
 ## ButtonToolbar
 
 Generates a toolbar of buttons
-
-**Parameters**
-
--   `props`  
 
 ## Dialog
 
@@ -178,13 +171,8 @@ JsonSchema-Form - more info at <https://github.com/mozilla-services/react-jsonsc
         -   `props.submitTo.method` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** HTTP Method to submit with (default POST)
         -   `props.submitTo.headers` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** HTTP Headers to append to the request
     -   `props.mapper` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** Used to mutate data returned from the form before sending it to the submitTo destination
-    -   `props.schemaEncoder`   (optional, default `KongEncoder`)
-    -   `props.uiSchemaEncoder`   (optional, default `KongUiEncoder`)
-    -   `props.props` **...any** 
 
 ## Form
-
-**Extends Component**
 
 JsonSchema-Form - more info at <https://github.com/mozilla-services/react-jsonschema-form>
 
@@ -432,7 +420,17 @@ Renders HTML directly
 **Parameters**
 
 -   `props` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `props.className` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** HTML Class Name, if not specified then 'embedded-html' is used
     -   `props.children` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** HTML to be displayed
+
+## MarkDown
+
+Renders MarkDown directly
+
+**Parameters**
+
+-   `props` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `props.children` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Markdown to be displayed
 
 ## DebugPanel
 

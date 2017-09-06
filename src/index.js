@@ -16,6 +16,7 @@ import YamlView from './YamlView';
 import Menus from './Menus';
 import DataViews from './dataview';
 import HTML from './html';
+import MarkDown from './markdown';
 import * as DebugTools from './debugtools';
 import * as Listing from './listing';
 import * as Errors from './error';
@@ -41,5 +42,6 @@ module.exports = {
   ...DebugTools,
   ...Listing,
   ...Errors,
+  ...MarkDown,
   HTML
 };
