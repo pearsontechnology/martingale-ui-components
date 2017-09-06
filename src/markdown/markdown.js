@@ -2,7 +2,18 @@ import React from 'react';
 import MD from 'markdown-it';
 import Panel from '../Panels/Panel';
 import HTML from '../html';
-const md = MD();
+import hljs from 'highlight.js';
+const md = MD({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, str).value;
+      } catch (__) {}
+    }
+
+    return ''; // use external default escaping
+  }
+});
 
 /**
  * Renders MarkDown directly
