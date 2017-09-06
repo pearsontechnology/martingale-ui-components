@@ -30,7 +30,6 @@
   "dependencies": {
     "js-yaml": "^3.9.1",
     "markdown-it": "^8.4.0",
-    "marked": "^0.3.6",
     "martingale-utils": "^0.0.1",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",

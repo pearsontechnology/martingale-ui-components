@@ -1,5 +1,6 @@
 import React from 'react';
 import MD from 'markdown-it';
+import Panel from '../Panels/Panel';
 import HTML from '../html';
 const md = MD();
 
@@ -12,7 +13,7 @@ const md = MD();
 
 const MarkDown = ({children: src})=>{
   const html = md.render(src);
-  return <HTML>{html}</HTML>;
+  return <Panel inset={true}><HTML>{html}</HTML></Panel>;
 };
 
 export default MarkDown;
