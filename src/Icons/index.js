@@ -24,6 +24,9 @@ import IconCertificate from 'react-icons/lib/fa/certificate';
 import IconSNI from 'react-icons/lib/md/security';
 import IconKitchensink from 'react-icons/lib/fa/bell-o';
 import IconUnknown from 'react-icons/lib/fa/question-circle';
+import IconBook from 'react-icons/lib/fa/book';
+import IconBookmark from 'react-icons/lib/fa/bookmark';
+import IconPage from 'react-icons/lib/fa/sticky-note';
 
 import Icon from 'react-icon-base';
 
@@ -92,5 +95,8 @@ export default {
   IconCertificate,
   IconSNI,
   IconKitchensink,
-  IconUnknown
+  IconUnknown,
+  IconBook,
+  IconBookmark,
+  IconPage
 };
