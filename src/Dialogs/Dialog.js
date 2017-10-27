@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import {
   Modal,
@@ -18,9 +19,9 @@ const createActionHandler = (actionName, action, dialog)=>{
   }
   const handler = action.handler || action;
   if(typeof(handler)==='function'){
-    return (e)=>{
+    return function(e){
       e&&e.preventDefault();
-      handler(dialog);
+      handler.bind(this)(dialog);
     };
   }
   throw new Error(`No handler specified on action: ${actionName}`);
@@ -38,7 +39,9 @@ const getDialogFooter = (footer, actions, dialog)=>{
     const actionButtons = Object.keys(actions).map((actionName)=>{
       const action = actions[actionName];
       return (
-        <Button key={actionName} onClick={createActionHandler(actionName, action, dialog)} className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</Button>
+        <Button key={actionName}
+          onClick={createActionHandler(actionName, action, dialog)}
+          className={`btn btn-${action.btnStyle||'primary'}`}>{actionName}</Button>
       );
     });
     return (
@@ -60,6 +63,7 @@ const getDialogFooter = (footer, actions, dialog)=>{
  * @param {array} props.actions - Array of actions to place in the dialog
  * @param {Component} props.footer - Content to put in the footer of the dialog
 */
+
 class Dialog extends Component{
   constructor({
       visible = false,
@@ -84,9 +88,17 @@ class Dialog extends Component{
     return this.setState({visible: true});
   }
 
+  requestHide(){
+    if(typeof(this.props.onHide)==='function'){
+      return this.props.onHide.bind(this)(this);
+    }
+    return this.close();
+  }
+
   render(){
     const {
-      title
+      title,
+      onHide
     } = this.props;
     const {
       visible
@@ -95,8 +107,9 @@ class Dialog extends Component{
       contents,
       footer
     } = this;
+    //<Modal isOpen={visible} onHide={this.close.bind(this)}>
     return (
-      <Modal isOpen={visible} onRequestHide={this.close.bind(this)}>
+      <Modal isOpen={visible} onRequestHide={this.requestHide.bind(this)}>
         <ModalHeader>
           <ModalTitle>{title}</ModalTitle>
         </ModalHeader>

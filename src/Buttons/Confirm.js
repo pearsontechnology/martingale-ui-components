@@ -9,7 +9,7 @@ const defaultActions=({onYes, onNo})=>{
       btnStyle: 'success',
       handler(dialog){
         if(onYes) {
-          return onYes(dialog);
+          return onYes.call(this, dialog);
         }
         dialog.close();
       }
@@ -18,7 +18,7 @@ const defaultActions=({onYes, onNo})=>{
       btnStyle: 'danger',
       handler(dialog){
         if(onNo) {
-          return onNo(dialog);
+          return onNo.call(this, dialog);
         }
         dialog.close();
       }

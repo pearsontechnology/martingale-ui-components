@@ -7,7 +7,7 @@ const defaultActions = ({onOk})=>{
   return {
     'Ok'(dialog){
       if(onOk){
-        return onOk(dialog);
+        return onOk.bind(this)(dialog);
       }
       dialog.close && dialog.close();
     }
@@ -20,6 +20,7 @@ const defaultActions = ({onOk})=>{
  * @param {string} props.caption - Text to display on the button
  * @param {string} props.title - Title to place in the dialog box
  * @param {string} props.message - Text to display within the dialog box
+ * @param {function} props.onOk - Callback to call when Ok button is clicked
  * @extends DialogButton
  */
 const InfoButton = ({onOk, actions: passedActions, ...props})=>{
@@ -33,7 +34,7 @@ const InfoButton = ({onOk, actions: passedActions, ...props})=>{
 };
 
 InfoButton.propTypes = Object.assign({}, DialogButton.propTypes, {
-  onOk: PropTypes.func
+  onOk: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 });
 
 export default InfoButton;
