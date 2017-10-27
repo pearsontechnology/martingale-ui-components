@@ -76,16 +76,14 @@ Generates a button that when clicked provides the user with a dialog of informat
 **Parameters**
 
 -   `props` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `props.onOk` **[function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** Callback to call when Ok button is clicked
     -   `props.caption` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Text to display on the button
     -   `props.title` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Title to place in the dialog box
     -   `props.message` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Text to display within the dialog box
-    -   `props.onOk`  
     -   `props.actions`  
     -   `props.props` **...any** 
 
 ## DialogButton
-
-**Extends React.Component**
 
 Generates a button that when clicked prompts the user with a dialog.
 
@@ -99,6 +97,7 @@ Generates a button that when clicked prompts the user with a dialog.
     -   `props.message` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Message to be displayed (instead of using children) inside the dialog
     -   `props.visible` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** Show the dialog
     -   `props.actions` **[array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Array of actions to place in the dialog
+    -   `props.fetch` **[object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Hash of remote requests to fetch before showing dialog
 
 ## Button
 
