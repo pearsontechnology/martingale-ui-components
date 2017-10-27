@@ -22,7 +22,8 @@ class DButton extends Component{
     const {
       target: url,
       successUrl = window.location.pathname || '/',
-      history
+      history,
+      headers
     } = this.props;
     if(!url){
       return false;
@@ -30,6 +31,7 @@ class DButton extends Component{
     fetchJson({
       url,
       method: 'DELETE',
+      headers,
       callback: (err, payload, res, contentType)=>{
         if(err){
           return console.error(err);
