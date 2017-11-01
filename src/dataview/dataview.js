@@ -8,6 +8,8 @@ import YamlView from '../YamlView/yamlview';
 import {Tabs} from '../tabs/tabs';
 import Error from '../error/error';
 
+import Actions from '../actions/actions';
+
 import {
   betterType
 } from 'martingale-utils';
@@ -37,7 +39,8 @@ const getDefaultKey = (columns = [], defaultValue = '')=>{
   return defaultValue;
 };
 
-const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap=false, inset = true, __level=0, ...props})=>{
+const ViewContents = ({data, viewOptions = true, actions, footerContents, footerActions, nowrap=false, inset = true, __level=0, ...props})=>{
+  const footer = footerContents?footerContents:(footerActions?<Actions actions={footerActions} />:'');
   const dataType = betterType(data);
   const wrap = (children, {inset})=>{
     if(nowrap){
@@ -51,7 +54,7 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
       return (
         <Panel inset={inset}>
           {children}
-          {footerContents}
+          {footer}
         </Panel>
       );
     }
@@ -70,7 +73,7 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
       }
     ];
     return (
-      <Tabs inset={inset} tabs={tabs} inset={false} footer={footerContents} />
+      <Tabs inset={inset} tabs={tabs} inset={false} footer={footer} />
     );
   };
   if(dataType === 'array'){
@@ -108,6 +111,7 @@ const ViewContents = ({data, viewOptions = true, actions, footerContents, nowrap
  * @param {boolean} props.inset - Should the content be inset
  * @param {any} props.data - Data to be displayed on the screen
  * @param {any} props.footerContents - Any contents that should be placed in the footer of the view
+ * @param {any} props.footerActions - Actions that should be placed in the footer of the view
  * @param {Component} props.View - Force the view by supplying the type
  */
 const DataView = (props)=>{
@@ -115,6 +119,7 @@ const DataView = (props)=>{
       inset,
       data,
       footerContents,
+      footerActions,
       View
     } = props;
   if(typeof(data)==='undefined'){

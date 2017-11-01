@@ -20,6 +20,7 @@ import MarkDown from './markdown';
 import * as DebugTools from './debugtools';
 import * as Listing from './listing';
 import * as Errors from './error';
+import * as Actions from './actions';
 
 module.exports = {
   ...Alerts,
@@ -43,5 +44,6 @@ module.exports = {
   ...Listing,
   ...Errors,
   ...MarkDown,
+  ...Actions,
   HTML
 };
