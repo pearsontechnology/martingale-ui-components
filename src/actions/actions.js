@@ -169,7 +169,7 @@ class ActionsView extends React.Component{
 };
 
 /**
- * A table with standard actions in the last column for each row
+ * Provides a list of actions to be displayed
  * @param {object} props
  * @param {array} props.actions - List of actions to be displayed
  * @param {array} props.data - The data to work with
