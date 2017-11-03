@@ -156,6 +156,7 @@ class BaseForm extends Component{
         method = 'POST',
         url,
         mapper,
+        'no-payload': noPayload = false,
         ...fetchOptions,
       } = submitOptions;
       const targetUrl = typeof(url)==='function'?url(data):url;
@@ -163,7 +164,7 @@ class BaseForm extends Component{
       return fetchJson(Object.assign(fetchOptions, {
         url: targetUrl,
         method,
-        payload: mapper?mapper(data):data,
+        payload: noPayload?undefined:(mapper?mapper(data):data),
         callback: (err, payload, res, contentType)=>{
           if(err){
             return console.error(err);
