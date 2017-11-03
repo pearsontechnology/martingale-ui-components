@@ -140,6 +140,12 @@ const KongUiEncoder = (schema)=>{
     case('table'):
       return KongUiEncoder(schema.schema)
     case('string'):
+      if(schema.hidden){
+        return {
+          "ui:widget": "hidden"
+        };
+      }
+    case('string'):
       if(schema.multiline){
         return {
           "ui:widget": "textarea"
