@@ -123,6 +123,7 @@ const createDeleteAction = ({
       message={replaceTokens(message, data)}
       successUrl={replaceTokens(successUrl, data)}
       caption={replaceTokens(caption, data)}
+      data={data}
       {...props}
       />
   );

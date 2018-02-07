@@ -67,17 +67,25 @@ const getDialogFooter = (footer, actions, dialog)=>{
 class Dialog extends Component{
   constructor({
       visible = false,
-      title,
-      message,
-      children,
-      footer,
-      actions,
-      onHide
     }){
     super();
-    this.contents = message || children;
     this.state = {visible};
-    this.footer = getDialogFooter(footer, actions, this);
+  }
+
+  footer(){
+    const{
+      footer,
+      actions,
+    } = this.props;
+    return getDialogFooter(footer, actions, this);
+  }
+
+  contents(){
+    const {
+      message,
+      children
+    } = this.props;
+    return message || children;
   }
 
   close(){
@@ -103,11 +111,8 @@ class Dialog extends Component{
     const {
       visible
     } = this.state;
-    const {
-      contents,
-      footer
-    } = this;
-    //<Modal isOpen={visible} onHide={this.close.bind(this)}>
+    const footer = this.footer();
+    const contents = this.contents();
     return (
       <Modal isOpen={visible} onRequestHide={this.requestHide.bind(this)}>
         <ModalHeader>
