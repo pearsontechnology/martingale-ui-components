@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {Table as BSTable} from 'react-bootstrap';
 import {
   isTheSame
 } from 'martingale-utils';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import YAML from 'js-yaml';
-//import 'react-table/react-table.css';
+import {CheckboxTable} from './checkboxtable';
 
 const upperFirst=(s)=>s.charAt(0).toUpperCase()+s.slice(1);
 
@@ -203,9 +202,12 @@ class Table extends Component{
       filterable = true,
       showPagination = true,
       showPaginationBottom=true,
-      showPaginationTop=false
+      showPaginationTop=false,
+      selectableRows=false
     } = this.props;
-    return <ReactTable
+    const TableComponent = selectableRows?CheckboxTable:ReactTable;
+    return <TableComponent
+      {...this.props}
       className="-striped -highlight"
       minRows={0}
       filterable={filterable}

@@ -16,6 +16,7 @@ const _UiButton = (props)=>{
     history,
     staticContext,
     onClick,
+    disabled: isDisabled = false,
     ...args
   } = props;
   const clickHandler = (e)=>{
@@ -29,8 +30,9 @@ const _UiButton = (props)=>{
       })(e);
     }
   };
+  const disabled = typeof(isDisabled)==='function'?isDisabled(props):isDisabled;
   return (
-    <Button bsStyle={btnStyle} onClick={clickHandler} {...args}>{children}</Button>
+    <Button bsStyle={btnStyle} onClick={clickHandler} {...args} disabled={disabled}>{children}</Button>
   );
 };
 
