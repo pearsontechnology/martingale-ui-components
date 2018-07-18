@@ -1,5 +1,5 @@
 import React from 'react';
-import {betterType} from 'martingale-utils';
+import {betterType} from '@martingale/utils';
 import Panel from '../Panels/Panel';
 
 class TreeNodeItem extends React.Component{

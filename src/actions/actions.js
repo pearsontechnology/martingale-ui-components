@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getObjectValue} from 'martingale-utils';
+import {getObjectValue} from '@martingale/utils';
 import Link from '../Router/routerlink';
 import Button from '../Buttons/Button';
 import DeleteButton from '../Buttons/Delete';
 import OptionsButton from '../Buttons/OptionsButton';
 import ConfirmButton from '../Buttons/Confirm';
-import {merge, fetch} from 'martingale-utils';
+import {merge, fetch} from '@martingale/utils';
 import { withRouter } from 'react-router-dom';
 
 const reToken = /\${([^}]+)}/g;

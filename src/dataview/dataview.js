@@ -12,7 +12,7 @@ import Actions from '../actions/actions';
 
 import {
   betterType
-} from 'martingale-utils';
+} from '@martingale/utils';
 
 const toString = (data)=>{
   const type = betterType(data);

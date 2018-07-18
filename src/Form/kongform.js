@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Form from './form';
 import {
   betterType
-} from 'martingale-utils';
+} from '@martingale/utils';
 
 const keyToTitle = (src)=>{
   return src.charAt(0).toUpperCase()+

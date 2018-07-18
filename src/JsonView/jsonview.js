@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   betterType
-} from 'martingale-utils';
+} from '@martingale/utils';
 
 const PrettyJsonView = ({src, inset=true})=>{
   const type = betterType(src);

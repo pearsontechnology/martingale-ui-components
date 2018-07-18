@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import YAML from 'js-yaml';
 import {
   betterType
-} from 'martingale-utils';
+} from '@martingale/utils';
 
 const PrettyYamlView = ({src, inset=true})=>{
   const type = betterType(src);

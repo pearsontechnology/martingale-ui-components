@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import {
   merge
-} from 'martingale-utils';
+} from '@martingale/utils';
 
 const makeFetchOptions = (...options)=>{
   return merge({credentials: 'same-origin'}, ...options);

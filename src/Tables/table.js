@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   isTheSame
-} from 'martingale-utils';
+} from '@martingale/utils';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import YAML from 'js-yaml';

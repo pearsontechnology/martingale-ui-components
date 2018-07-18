@@ -70,7 +70,7 @@ const KongTestSchema = {
 
 import {
   pageSchemaToReact
-} from 'martingale-page-schema';
+} from '@martingale/page-schema';
 
 const tableData = [
     {name: 'Test User', status: 'Active', level: 'Admin'},

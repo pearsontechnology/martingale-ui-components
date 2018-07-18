@@ -7,7 +7,7 @@ import {
   isNumeric,
   parseObjectPath,
   getObjectValue
-} from 'martingale-utils';
+} from '@martingale/utils';
 import Alert from '../Alerts/Alerts';
 import {validate} from 'jsonschema';
 

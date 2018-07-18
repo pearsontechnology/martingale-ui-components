@@ -1,7 +1,5 @@
-import React, {Component} from 'react';
-import {
-  fetchJson
-} from 'martingale-utils';
+import React, { Component } from 'react';
+import { fetchJson } from '@martingale/utils';
 import Button from './Confirm';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -17,23 +15,23 @@ import PropTypes from 'prop-types';
  * @extends Button
  */
 
-class DButton extends Component{
-  performDelete(){
+class DButton extends Component {
+  performDelete() {
     const {
       target: url,
       successUrl = window.location.pathname || '/',
       history,
       headers
     } = this.props;
-    if(!url){
+    if (!url) {
       return false;
     }
     fetchJson({
       url,
       method: 'DELETE',
       headers,
-      callback: (err, payload, res, contentType)=>{
-        if(err){
+      callback: (err, payload, res, contentType) => {
+        if (err) {
           return console.error(err);
         }
         history.push(successUrl);
@@ -41,7 +39,7 @@ class DButton extends Component{
     });
   }
 
-  render(){
+  render() {
     const {
       caption = 'Delete',
       title = 'Are you sure?',
@@ -62,10 +60,10 @@ class DButton extends Component{
         message={message}
         onYes={this.performDelete.bind(this)}
         {...props}
-        />
+      />
     );
   }
-};
+}
 
 const DeleteButton = withRouter(DButton);
 
