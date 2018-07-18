@@ -1,5 +1,5 @@
 {
-  "name": "martingale-ui-components",
+  "name": "@martingale/ui-components",
   "version": "0.0.2",
   "description": "Collection of all of the base UI components used within Martingale",
   "main": "index.js",
@@ -31,7 +31,7 @@
     "highlight.js": "^9.12.0",
     "js-yaml": "^3.10.0",
     "markdown-it": "^8.4.0",
-    "martingale-utils": "^0.0.1",
+    "@martingale/utils": "^0.0.1",
     "output-file-sync": "^2.0.0",
     "react": "^15.6.2",
     "react-bootstrap": "^0.32.1",
