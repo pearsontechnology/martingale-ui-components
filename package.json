@@ -1,9 +1,11 @@
 {
   "name": "@martingale/ui-components",
   "version": "0.0.3",
-  "description": "Collection of all of the base UI components used within Martingale",
+  "description":
+    "Collection of all of the base UI components used within Martingale",
   "main": "index.js",
-  "repository": "https://github.com/pearsontechnology/martingale-ui-components.git",
+  "repository":
+    "https://github.com/pearsontechnology/martingale-ui-components.git",
   "author": "Jeremy Darling <jeremy.darling@pearson.com>",
   "license": "Apache-2.0",
   "scripts": {
@@ -14,21 +16,21 @@
     "prepublish": "npm run test",
     "start": "nodemon --watch src --exec 'yarn compile'",
     "doc_dev": "NODE_ENV=production documentation serve -w src/index.js",
-    "doc": "mkdir -p docs && NODE_ENV=production documentation build src/index.js --format md > docs/readme.md"
+    "doc":
+      "mkdir -p docs && NODE_ENV=production documentation build src/index.js --format md > docs/readme.md"
   },
   "devDependencies": {
-    "@martingale/page-schema": "0.0.3",
     "babel-cli": "^6.26.0",
     "babel-jest": "^19.0.0",
     "babel-preset-react-app": "^2.2.0",
     "documentation": "^5.3.5",
     "jest": "^19.0.2",
-    "jsonschema": "^1.2.2",
     "nodemon": "^1.14.12",
     "react-test-renderer": "^15.6.2",
     "yargs": "^8.0.2"
   },
   "dependencies": {
+    "@martingale/page-schema": "0.0.3",
     "@martingale/utils": "^0.0.1",
     "highlight.js": "^9.12.0",
     "js-yaml": "^3.10.0",
@@ -44,6 +46,7 @@
     "react-overlays": "^0.8.3",
     "react-router-dom": "^4.2.2",
     "react-table": "^6.7.6",
+    "jsonschema": "^1.2.2",
     "uuid": "^3.2.1"
   }
 }
